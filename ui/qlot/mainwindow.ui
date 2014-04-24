@@ -58,10 +58,51 @@
          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
         </property>
        </widget>
-       <widget class="QComboBox" name="critere_combo_box"/>
-       <widget class="QLineEdit" name="ligne_recherche"/>
+       <widget class="QComboBox" name="critere_combo_box_gestion">
+        <item>
+         <property name="text">
+          <string>Modele</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Couleur</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Taille</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Quantité</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Date de livraison</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Prix d'achat</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Prix de vente</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Rabais</string>
+         </property>
+        </item>
+       </widget>
+       <widget class="QLineEdit" name="ligne_recherche_gestion"/>
       </widget>
-      <widget class="QTableWidget" name="tableau_recherche">
+      <widget class="QTableWidget" name="tableau_recherche_gestion">
        <property name="lineWidth">
         <number>1</number>
        </property>
@@ -236,10 +277,31 @@
          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
         </property>
        </widget>
-       <widget class="QComboBox" name="critere_combo_box_3"/>
-       <widget class="QLineEdit" name="ligne_recherche_3"/>
+       <widget class="QComboBox" name="critere_combo_box_vente">
+        <item>
+         <property name="text">
+          <string>Identifiant</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Date</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Articles vendus</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Prix total</string>
+         </property>
+        </item>
+       </widget>
+       <widget class="QLineEdit" name="ligne_recherche_vente"/>
       </widget>
-      <widget class="QTableWidget" name="tableWidget">
+      <widget class="QTableWidget" name="tableWidget_vente">
        <attribute name="horizontalHeaderDefaultSectionSize">
         <number>180</number>
        </attribute>
@@ -313,7 +375,7 @@
     <enum>TopToolBarArea</enum>
    </attribute>
    <attribute name="toolBarBreak">
-    <bool>true</bool>
+    <bool>false</bool>
    </attribute>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
@@ -347,26 +409,6 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+Q</string>
-   </property>
-  </action>
-  <action name="actionAjout_d_une_marchandise">
-   <property name="text">
-    <string>Ajout d'une marchandise</string>
-   </property>
-  </action>
-  <action name="actionChercher_une_marchandise_dans_le_stock">
-   <property name="text">
-    <string>Chercher une marchandise dans le stock</string>
-   </property>
-  </action>
-  <action name="actionVendre_un_article">
-   <property name="text">
-    <string>Vendre un article</string>
-   </property>
-  </action>
-  <action name="actionChercher_une_vente">
-   <property name="text">
-    <string>Chercher une vente</string>
    </property>
   </action>
   <action name="actionVersion">

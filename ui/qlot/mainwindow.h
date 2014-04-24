@@ -2,6 +2,10 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QFileDialog>
+#include "versiondialog.h"
+#include "ajoutmarchandisedialog.h"
+#include "ajoutventedialog.h"
 
 namespace Ui {
 class MainWindow;
@@ -17,6 +21,14 @@ public:
     
 private:
     Ui::MainWindow *ui;
+
+private slots:
+    void version();
+    void ajoutMarchandise();
+    void ajoutVente();
+    void nouvellebdd();
+    void enregistrer();
+    void ouvrir();
 };
 
 #endif // MAINWINDOW_H

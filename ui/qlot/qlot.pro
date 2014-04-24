@@ -13,18 +13,15 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     versiondialog.cpp \
-    nouvellebdddialog.cpp \
     ajoutmarchandisedialog.cpp \
     ajoutventedialog.cpp
 
 HEADERS  += mainwindow.h \
     versiondialog.h \
-    nouvellebdddialog.h \
     ajoutmarchandisedialog.h \
     ajoutventedialog.h
 
 FORMS    += mainwindow.ui \
     versiondialog.ui \
-    nouvellebdddialog.ui \
     ajoutmarchandisedialog.ui \
     ajoutventedialog.ui

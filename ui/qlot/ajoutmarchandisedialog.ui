@@ -66,7 +66,7 @@
      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit"/>
+   <widget class="QLineEdit" name="modele_edit"/>
   </widget>
   <widget class="QSplitter" name="splitter_4">
    <property name="geometry">
@@ -88,7 +88,7 @@
      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
     </property>
    </widget>
-   <widget class="QSpinBox" name="spinBox">
+   <widget class="QSpinBox" name="spinBox_taille">
     <property name="suffix">
      <string> (EU)</string>
     </property>
@@ -123,7 +123,7 @@
      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
     </property>
    </widget>
-   <widget class="QDoubleSpinBox" name="doubleSpinBox">
+   <widget class="QDoubleSpinBox" name="doubleSpinBox_achat">
     <property name="suffix">
      <string>€</string>
     </property>
@@ -158,7 +158,7 @@
      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
     </property>
    </widget>
-   <widget class="QSpinBox" name="spinBox_2">
+   <widget class="QSpinBox" name="spinBox_quantite">
     <property name="minimum">
      <number>1</number>
     </property>
@@ -190,7 +190,7 @@
      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
     </property>
    </widget>
-   <widget class="QDoubleSpinBox" name="doubleSpinBox_3">
+   <widget class="QDoubleSpinBox" name="doubleSpinBox_rabais">
     <property name="prefix">
      <string>- </string>
     </property>
@@ -231,7 +231,123 @@
      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
     </property>
    </widget>
-   <widget class="QComboBox" name="comboBox"/>
+   <widget class="QComboBox" name="comboBox_couleur">
+    <item>
+     <property name="text">
+      <string>Cyan</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Magenta</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Emeraude</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Jaune</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Bleu</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Rouge</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Vert</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Saphir</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Kaki</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Brun</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Marron</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Rose</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Violet</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Mauve</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Pourpre</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Bleu roi</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Ocre</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Noir</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Blanc</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Gris</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Beige</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Crème</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Fluo</string>
+     </property>
+    </item>
+   </widget>
   </widget>
   <widget class="QSplitter" name="splitter_8">
    <property name="geometry">
@@ -253,7 +369,7 @@
      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
     </property>
    </widget>
-   <widget class="QDoubleSpinBox" name="doubleSpinBox_2">
+   <widget class="QDoubleSpinBox" name="doubleSpinBox_vente">
     <property name="suffix">
      <string>€</string>
     </property>
@@ -288,7 +404,7 @@
      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
     </property>
    </widget>
-   <widget class="QDateEdit" name="dateEdit">
+   <widget class="QDateEdit" name="dateEdit_livraison">
     <property name="date">
      <date>
       <year>2014</year>
@@ -311,22 +427,6 @@
  </widget>
  <resources/>
  <connections>
-  <connection>
-   <sender>ajout_marchandise_button</sender>
-   <signal>clicked()</signal>
-   <receiver>AjoutMarchandiseDialog</receiver>
-   <slot>accept()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>98</x>
-     <y>363</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>161</x>
-     <y>200</y>
-    </hint>
-   </hints>
-  </connection>
   <connection>
    <sender>refus_marchandise_button</sender>
    <signal>clicked()</signal>

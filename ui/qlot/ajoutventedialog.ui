@@ -20,7 +20,7 @@
    <iconset>
     <normaloff>../../images/qlot_512.svg</normaloff>../../images/qlot_512.svg</iconset>
   </property>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -51,7 +51,7 @@
              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
             </property>
            </widget>
-           <widget class="QComboBox" name="comboBox"/>
+           <widget class="QComboBox" name="comboBox_ref_vente"/>
           </widget>
           <widget class="QSplitter" name="splitter_2">
            <property name="orientation">
@@ -65,7 +65,7 @@
              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
             </property>
            </widget>
-           <widget class="QSpinBox" name="spinBox">
+           <widget class="QSpinBox" name="spinBox_qtite_vente">
             <property name="minimum">
              <number>1</number>
             </property>
@@ -197,7 +197,7 @@
          </spacer>
         </item>
         <item>
-         <widget class="QLineEdit" name="lineEdit">
+         <widget class="QLineEdit" name="prix_total_vente">
           <property name="text">
            <string>0,00</string>
           </property>
@@ -290,5 +290,22 @@
   </widget>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>button_annuler_vente</sender>
+   <signal>clicked()</signal>
+   <receiver>AjoutVenteDialog</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>376</x>
+     <y>495</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>275</x>
+     <y>265</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>
