@@ -76,19 +76,19 @@ public:
      * \brief Obtenir le prix d'achat.
      * \return Prix d'achat.
      */
-    float prix_achat (void) const;
+    double prix_achat (void) const;
 
     /**
      * \brief Obtenir le prix de vente.
      * \return Prix de vente.
      */
-    float prix_vente (void) const;
+    double prix_vente (void) const;
 
     /**
      * \brief Obtenir le prix de vente effectif (après application du rabais).
      * \return Prix de vente effectif.
      */
-    float prix_vente_effectif (void) const;
+    double prix_vente_effectif (void) const;
 
     /**
      * \brief Obtenir la quantité en stock.

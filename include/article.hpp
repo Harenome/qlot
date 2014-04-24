@@ -52,7 +52,7 @@ public:
      * \param prix_vente Prix de vente.
      * La date est initialisée à la date courante.
      */
-    article (const reference_article & reference, float prix_achat, float prix_vente);
+    article (const reference_article & reference, double prix_achat, double prix_vente);
 
     /**
      * \brief Constructeur.
@@ -61,7 +61,7 @@ public:
      * \param prix_vente Prix de vente.
      * \param date_livraison Date de livraison.
      */
-    article (const reference_article & reference, float prix_achat, float prix_vente, const date & date_livraison);
+    article (const reference_article & reference, double prix_achat, double prix_vente, const date & date_livraison);
 
     /**
      * \brief Constructeur.
@@ -72,7 +72,7 @@ public:
      * \param prix_vente Prix de vente.
      * La date est initialisée à la date courante.
      */
-    article (unsigned int modele, unsigned int couleur, unsigned int taille, float prix_achat, float prix_vente);
+    article (unsigned int modele, unsigned int couleur, unsigned int taille, double prix_achat, double prix_vente);
 
     /**
      * \brief Constructeur.
@@ -83,7 +83,7 @@ public:
      * \param prix_vente Prix de vente.
      * \param date_livraison Date de livraison.
      */
-    article (unsigned int modele, unsigned int couleur, unsigned int taille, float prix_achat, float prix_vente, const date & date_livraison);
+    article (unsigned int modele, unsigned int couleur, unsigned int taille, double prix_achat, double prix_vente, const date & date_livraison);
 
     /**
      * \brief Destructeur.
@@ -118,19 +118,19 @@ public:
      * \brief Obtenir le prix d'achat.
      * \return Prix d'achat.
      */
-    float prix_achat (void) const;
+    double prix_achat (void) const;
 
     /**
      * \brief Obtenir le prix de vente.
      * \return Prix de vente.
      */
-    float prix_vente (void) const;
+    double prix_vente (void) const;
 
     /**
      * \brief Obtenir le prix de vente effectif (après application du rabais).
      * \return Prix de vente effectif.
      */
-    float prix_vente_effectif (void) const;
+    double prix_vente_effectif (void) const;
 
     /**
      * \brief Obtenir la date de livraison.
@@ -160,13 +160,13 @@ public:
      * \brief Modifier le prix d'achat.
      * \param prix_achat Nouveau prix d'achat.
      */
-    void modifier_prix_achat (float prix_achat);
+    void modifier_prix_achat (double prix_achat);
 
     /**
      * \brief Modifier le prix de vente
      * \param prix_vente Nouveau prix de vente.
      */
-    void modifier_prix_vente (float prix_vente);
+    void modifier_prix_vente (double prix_vente);
 
     /**
      * \brief Modifier la date de livraison.
@@ -197,8 +197,8 @@ public:
 private:
     reference_article _reference;   /**<- Référence. */
     date _date_livraison;           /**<- Date de livraison. */
-    float _prix_achat;              /**<- Prix d'achat. */
-    float _prix_vente;              /**<- Prix de vente. */
+    double _prix_achat;              /**<- Prix d'achat. */
+    double _prix_vente;              /**<- Prix de vente. */
 
     /**
      * \brief Initialiser.
@@ -206,7 +206,7 @@ private:
      * \param prix_achat Prix d'achat.
      * \param prix_vente Prix de vente.
      */
-    void _initialiser (const reference_article & reference, float prix_achat, float prix_vente);
+    void _initialiser (const reference_article & reference, double prix_achat, double prix_vente);
 
     /**
      * \brief Initialiser.
@@ -216,7 +216,7 @@ private:
      * \param prix_achat Prix d'achat.
      * \param prix_vente Prix de vente.
      */
-    void _initialiser (unsigned int modele, unsigned int couleur, unsigned int taille, float prix_achat, float prix_vente);
+    void _initialiser (unsigned int modele, unsigned int couleur, unsigned int taille, double prix_achat, double prix_vente);
 };
 
 ////////////////////////////////////////////////////////////////////////////////

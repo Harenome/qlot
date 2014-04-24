@@ -63,9 +63,9 @@ unsigned int vente::id (void) const
     return _id;
 }
 
-float vente::total (void) const
+double vente::total (void) const
 {
-    float somme = 0.0;
+    double somme = 0.0;
     for (vente_map::const_iterator it = _articles_vendus.begin (); it != _articles_vendus.end (); ++it)
         somme += it->second.total ();
     return somme;
@@ -81,14 +81,47 @@ unsigned int vente::quantite_articles_vendus (void) const
     return _articles_vendus.size ();
 }
 
-bool vente::vendu (unsigned int reference) const
+bool vente::vendu_article (unsigned int reference) const
 {
     return _articles_vendus.count (reference) == 1;
 }
 
-bool vente::vendu (const reference_article & reference) const
+bool vente::vendu_article (const reference_article & reference) const
 {
-    return vendu (reference.vers_entier ());
+    return vendu_article (reference.vers_entier ());
+}
+
+bool vente::vendu_modele (unsigned int modele) const
+{
+    bool trouve = false;
+    for (vente_const_iterator it = _articles_vendus.begin (); ! trouve && it != _articles_vendus.end (); ++it)
+    {
+        article_vendu a = it->second;
+        trouve = a.reference ().modele () == modele;
+    }
+    return trouve;
+}
+
+bool vente::vendu_taille (unsigned int taille) const
+{
+    bool trouve = false;
+    for (vente_const_iterator it = _articles_vendus.begin (); ! trouve && it != _articles_vendus.end (); ++it)
+    {
+        article_vendu a = it->second;
+        trouve = a.reference ().taille () == taille;
+    }
+    return trouve;
+}
+
+bool vente::vendu_couleur (unsigned int couleur) const
+{
+    bool trouve = false;
+    for (vente_const_iterator it = _articles_vendus.begin (); ! trouve && it != _articles_vendus.end (); ++it)
+    {
+        article_vendu a = it->second;
+        trouve = a.reference ().couleur () == couleur;
+    }
+    return trouve;
 }
 
 article_vendu & vente::operator[] (unsigned int reference)
@@ -128,7 +161,7 @@ void vente::modifier_date_vente (const date & date_vente)
 
 void vente::retirer_article_vendu (unsigned int reference)
 {
-    if (vendu (reference))
+    if (vendu_article (reference))
         _articles_vendus.erase (reference);
 }
 
@@ -139,7 +172,7 @@ void vente::retirer_article_vendu (const reference_article & reference)
 
 void vente::remplacer_reference (unsigned int ancienne_reference, unsigned int nouvelle_reference)
 {
-    if (vendu (ancienne_reference))
+    if (vendu_article (ancienne_reference))
     {
         article_vendu nouvel_article (operator[] (ancienne_reference));
         nouvel_article.modifier_reference (nouvelle_reference);

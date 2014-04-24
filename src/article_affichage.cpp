@@ -56,17 +56,17 @@ date article_affichage::date_livraison (void) const
     return _article.date_livraison ();
 }
 
-float article_affichage::prix_achat (void) const
+double article_affichage::prix_achat (void) const
 {
     return _article.prix_achat ();
 }
 
-float article_affichage::prix_vente (void) const
+double article_affichage::prix_vente (void) const
 {
     return _article.prix_vente ();
 }
 
-float article_affichage::prix_vente_effectif (void) const
+double article_affichage::prix_vente_effectif (void) const
 {
     return rabais ().appliquer_a (prix_vente ());
 }

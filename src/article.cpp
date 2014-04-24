@@ -18,14 +18,14 @@
 // Initialisateurs.
 ////////////////////////////////////////////////////////////////////////////////
 
-void article::_initialiser (const reference_article & reference, float prix_achat, float prix_vente)
+void article::_initialiser (const reference_article & reference, double prix_achat, double prix_vente)
 {
     _reference = reference;
     _prix_achat = prix_achat;
     _prix_vente = prix_vente;
 }
 
-void article::_initialiser (unsigned int modele, unsigned int couleur, unsigned int taille, float prix_achat, float prix_vente)
+void article::_initialiser (unsigned int modele, unsigned int couleur, unsigned int taille, double prix_achat, double prix_vente)
 {
     reference_article r (modele, couleur, taille);
     _initialiser (r, prix_achat, prix_vente);
@@ -44,23 +44,23 @@ article::article (const article & a)
     operator= (a);
 }
 
-article::article (const reference_article & reference, float prix_achat, float prix_vente)
+article::article (const reference_article & reference, double prix_achat, double prix_vente)
 {
     _initialiser (reference, prix_achat, prix_vente);
 }
 
-article::article (const reference_article & reference, float prix_achat, float prix_vente, const date & date_livraison)
+article::article (const reference_article & reference, double prix_achat, double prix_vente, const date & date_livraison)
 {
     _initialiser (reference, prix_achat, prix_vente);
     _date_livraison = date_livraison;
 }
 
-article::article (unsigned int modele, unsigned int couleur, unsigned int taille, float prix_achat, float prix_vente)
+article::article (unsigned int modele, unsigned int couleur, unsigned int taille, double prix_achat, double prix_vente)
 {
     _initialiser (modele, couleur, taille, prix_achat, prix_vente);
 }
 
-article::article (unsigned int modele, unsigned int couleur, unsigned int taille, float prix_achat, float prix_vente, const date & date_livraison)
+article::article (unsigned int modele, unsigned int couleur, unsigned int taille, double prix_achat, double prix_vente, const date & date_livraison)
 {
     _initialiser (modele, couleur, taille, prix_achat, prix_vente);
     _date_livraison = date_livraison;
@@ -98,12 +98,12 @@ unsigned int article::taille (void) const
     return _reference.taille ();
 }
 
-float article::prix_achat (void) const
+double article::prix_achat (void) const
 {
     return _prix_achat;
 }
 
-float article::prix_vente (void) const
+double article::prix_vente (void) const
 {
     return _prix_vente;
 }
@@ -132,12 +132,12 @@ void article::modifier_couleur (unsigned int couleur)
     _reference.modifier_couleur (couleur);
 }
 
-void article::modifier_prix_achat (float prix_achat)
+void article::modifier_prix_achat (double prix_achat)
 {
     _prix_achat = prix_achat;
 }
 
-void article::modifier_prix_vente (float prix_vente)
+void article::modifier_prix_vente (double prix_vente)
 {
     _prix_vente = prix_vente;
 }
@@ -185,7 +185,7 @@ std::istream & operator>> (std::istream & is, article & a)
 {
     reference_article reference;
     date date_livraison;
-    float prix_achat, prix_vente;
+    double prix_achat, prix_vente;
 
     is >> reference >> date_livraison >> prix_achat >> prix_vente;
 

@@ -126,7 +126,7 @@ public:
      * \brief Obtenir le total payé pour toutes les ventes.
      * \return Total.
      */
-    float total (void) const;
+    double total (void) const;
 
     /**
      * \brief Obtenir le nombre de ventes.
@@ -152,6 +152,7 @@ public:
      * \return \c os.
      */
     std::ostream & ecrire_vers (std::ostream & os) const;
+
 private:
     historique_ventes_map _ventes;  /**<- Ventes. */
 };

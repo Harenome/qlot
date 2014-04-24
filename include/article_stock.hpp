@@ -21,7 +21,6 @@
 
 #include "reference_article.hpp"
 #include "pourcentage.hpp"
-#include "article.hpp"
 
 ////////////////////////////////////////////////////////////////////////////////
 // Classe.
@@ -117,6 +116,7 @@ public:
      * \param a Article en stock.
      */
     article_stock & operator= (article_stock a);
+
 private:
     pourcentage _rabais;            /**<- Rabais. */
     unsigned int _quantite_stock;   /**<- Quantité en stock. */

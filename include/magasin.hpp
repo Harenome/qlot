@@ -21,15 +21,19 @@
 #include <vector>
 #include <algorithm>
 
-#include "article.hpp"
-#include "reference_article.hpp"
-#include "pourcentage.hpp"
 #include "date.hpp"
+#include "pourcentage.hpp"
+#include "reference_article.hpp"
+#include "article.hpp"
+#include "article_affichage.hpp"
+#include "article_stock.hpp"
+#include "article_vendu.hpp"
+#include "vente.hpp"
 #include "stock.hpp"
 #include "historique_ventes.hpp"
 #include "articles_existants.hpp"
-#include "article_affichage.hpp"
 #include "condition_article.hpp"
+#include "condition_vente.hpp"
 
 ////////////////////////////////////////////////////////////////////////////////
 // Classe.
@@ -78,6 +82,29 @@ public:
     unsigned int nombre_articles (void) const;
 
     /**
+     * \brief Obtenir le nombre d'articles en stock.
+     * \return Nombre d'articles en stock.
+     *
+     * Les articles en stock sont les articles dont la quantité est supérieure
+     * ou égale à 1. Donc magasin::nombre_articles_en_stock retourne une
+     * valeur inférieure ou égale à magasin::nombre_articles.
+     */
+    unsigned int nombre_articles_en_stock (void) const;
+
+    /**
+     * \brief Déterminer les frais.
+     * \return Frais.
+     */
+    double frais (void) const;
+
+    /**
+     * \brief Déterminer les bénéfices.
+     * \return Bénéfices.
+     * \note Équivalent à magasin::chiffre_d_affaires () - magasin::frais ().
+     */
+    double benefices (void) const;
+
+    /**
      * \brief Obtenir le nombre de ventes.
      * \return Nombre de ventes.
      */
@@ -87,10 +114,10 @@ public:
      * \brief Déterminer le prix total payé pour toutes les ventes.
      * \return Total.
      */
-    float total_ventes (void) const;
+    double chiffre_d_affaires (void) const;
 
     /**
-     * \brief Déterminier si un article existe.
+     * \brief Déterminer si un article existe.
      * \param reference Référence.
      * \retval true Si l'article existe.
      * \retval false Sinon.
@@ -118,6 +145,30 @@ public:
      * \return Article affichage.
      */
     article_affichage operator[] (const reference_article & reference) const;
+
+    /**
+     * \brief Obtenir tous les articles.
+     * \return Articles.
+     */
+    std::vector<article_affichage> articles (void) const;
+
+    /**
+     * \brief Obtenir tous les articles en stock.
+     * \return Articles.
+     */
+    std::vector<article_affichage> articles_en_stock (void) const;
+
+    /**
+     * \brief Obtenir toutes les references.
+     * \return Références.
+     */
+    std::vector<reference_article> references (void) const;
+
+    /**
+     * \brief Obtenir toutes les references des articles en stock.
+     * \return Références.
+     */
+    std::vector<reference_article> references_en_stock (void) const;
 
     /**
      * \brief Obtenir les articles dont le modèle correspond.
@@ -153,7 +204,7 @@ public:
      * \param maximum Prix maximum.
      * \return Articles qui correspondent.
      */
-    std::vector<article_affichage> articles_par_prix_achat (float minimum, float maximum) const;
+    std::vector<article_affichage> articles_par_prix_achat (double minimum, double maximum) const;
 
     /**
      * \brief Obtenir les articles dont le prix de vente correspond.
@@ -161,7 +212,7 @@ public:
      * \param maximum Prix maximum.
      * \return Articles qui correspondent.
      */
-    std::vector<article_affichage> articles_par_prix_vente (float minimum, float maximum) const;
+    std::vector<article_affichage> articles_par_prix_vente (double minimum, double maximum) const;
 
     /**
      * \brief Obtenir les articles dont le prix de vente effectif correspond.
@@ -169,7 +220,49 @@ public:
      * \param maximum Prix maximum.
      * \return Articles qui correspondent.
      */
-    std::vector<article_affichage> articles_par_prix_effectif (float minimum, float maximum) const;
+    std::vector<article_affichage> articles_par_prix_effectif (double minimum, double maximum) const;
+
+    /**
+     * \brief Obtenir les ventes dont la date correspond.
+     * \param d Date.
+     * \return Ventes qui correspondent.
+     */
+    std::vector<vente> ventes_par_date (const date & d) const;
+
+    /**
+     * \brief Obtenir les ventes contenant un article qui correspond.
+     * \param reference Référence recherchée.
+     * \return Ventes qui correspondent.
+     */
+    std::vector<vente> ventes_par_reference (const reference_article & reference) const;
+
+    /**
+     * \brief Obtenir les ventes contenant un article qui correspond.
+     * \param reference Référence recherchée.
+     * \return Ventes qui correspondent.
+     */
+    std::vector<vente> ventes_par_reference (unsigned int reference) const;
+
+    /**
+     * \brief Obtenir les ventes contenant un article qui correspond.
+     * \param modele Modèle recherché.
+     * \return Ventes qui correspondent.
+     */
+    std::vector<vente> ventes_par_modele (unsigned int modele) const;
+
+    /**
+     * \brief Obtenir les ventes contenant un article qui correspond.
+     * \param taille Taille recherchée.
+     * \return Ventes qui correspondent.
+     */
+    std::vector<vente> ventes_par_taille (unsigned int taille) const;
+
+    /**
+     * \brief Obtenir les ventes contenant un article qui correspond.
+     * \param couleur Couleur recherchée.
+     * \return Ventes qui correspondent.
+     */
+    std::vector<vente> ventes_par_couleur (unsigned int couleur) const;
 
     /**
      * \brief Ajouter un article.
@@ -286,28 +379,28 @@ public:
      * \param reference Référence de l'article à modifier.
      * \param prix Nouveau prix d'achat.
      */
-    void modifier_prix_achat_article (unsigned int reference, float prix);
+    void modifier_prix_achat_article (unsigned int reference, double prix);
 
     /**
      * \brief Modifier le prix d'achat d'un article.
      * \param reference Référence de l'article à modifier.
      * \param prix Nouveau prix d'achat.
      */
-    void modifier_prix_achat_article (const reference_article & reference, float prix);
+    void modifier_prix_achat_article (const reference_article & reference, double prix);
 
     /**
      * \brief Modifier le prix d'vente d'un article.
      * \param reference Référence de l'article à modifier.
      * \param prix Nouveau prix d'vente.
      */
-    void modifier_prix_vente_article (unsigned int reference, float prix);
+    void modifier_prix_vente_article (unsigned int reference, double prix);
 
     /**
      * \brief Modifier le prix d'vente d'un article.
      * \param reference Référence de l'article à modifier.
      * \param prix Nouveau prix d'vente.
      */
-    void modifier_prix_vente_article (const reference_article & reference, float prix);
+    void modifier_prix_vente_article (const reference_article & reference, double prix);
 
     /**
      * \brief Modifier la date de livraison d'un article.
@@ -405,7 +498,7 @@ public:
      * \param reference Référence de l'article.
      * \param prix Prix.
      */
-    void modifier_vente_article_prix (unsigned int id, unsigned int reference, float prix);
+    void modifier_vente_article_prix (unsigned int id, unsigned int reference, double prix);
 
     /**
      * \brief Modifier le prix de vente d'un article dans une vente.
@@ -413,7 +506,7 @@ public:
      * \param reference Référence de l'article.
      * \param prix Prix.
      */
-    void modifier_vente_article_prix (unsigned int id, const reference_article & reference, float prix);
+    void modifier_vente_article_prix (unsigned int id, const reference_article & reference, double prix);
 
     /**
      * \brief Échanger deux magasins.
@@ -465,8 +558,9 @@ private:
      * \param condition Condition.
      * \return std::vector.
      */
-    std::vector<article_affichage> _articles_par_condition (condition_article condition) const;
+    std::vector<article_affichage> _articles_par_condition (const condition_article & condition) const;
 
+    std::vector<vente> _ventes_par_condition (const condition_vente & condition) const;
     /**
      * \brief Modifier le modèle d'un article.
      * \param a Article
@@ -535,7 +629,7 @@ std::ostream & operator<< (std::ostream & os, const magasin & m);
  * \return \c is.
  * \relates magasin
  */
-std::istream & operator<< (std::istream & is, magasin & m);
+std::istream & operator>> (std::istream & is, magasin & m);
 
 /**
  * \brief Échanger deux magasins.

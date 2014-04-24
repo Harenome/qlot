@@ -18,7 +18,7 @@
 // Initialisateur.
 ////////////////////////////////////////////////////////////////////////////////
 
-void article_vendu::_initialiser (const reference_article & reference, unsigned int quantite, float prix)
+void article_vendu::_initialiser (const reference_article & reference, unsigned int quantite, double prix)
 {
     _reference = reference;
     _quantite = quantite;
@@ -35,7 +35,7 @@ article_vendu::article_vendu (void)
     _initialiser (r, 0, 0);
 }
 
-article_vendu::article_vendu (const reference_article & reference, unsigned int quantite, float prix)
+article_vendu::article_vendu (const reference_article & reference, unsigned int quantite, double prix)
 {
     _initialiser (reference, quantite, prix);
 }
@@ -62,12 +62,12 @@ unsigned int article_vendu::quantite_vendue (void) const
     return _quantite;
 }
 
-float article_vendu::prix (void) const
+double article_vendu::prix (void) const
 {
     return _prix;
 }
 
-float article_vendu::total (void) const
+double article_vendu::total (void) const
 {
     return quantite_vendue () * prix ();
 }
@@ -97,7 +97,7 @@ void article_vendu::modifier_quantite_vendue (unsigned int quantite)
     _quantite = quantite;
 }
 
-void article_vendu::modifier_prix (float prix)
+void article_vendu::modifier_prix (double prix)
 {
     _prix = prix;
 }
@@ -134,7 +134,7 @@ std::istream & operator>> (std::istream & is, article_vendu & a)
 {
     reference_article reference;
     unsigned int quantite;
-    float prix;
+    double prix;
 
     is >> reference >> quantite >> prix;
 

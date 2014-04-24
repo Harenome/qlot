@@ -1,6 +1,6 @@
 /**
  * \file condition_article.hpp
- * \brief Magasin.
+ * \brief Condition article.
  * \author RAZANAJATO RANAIVOARIVONY Harenome
  * \author MEYER Jérémy
  * \date 2014
@@ -18,106 +18,183 @@
 #include <functional>
 #include "article.hpp"
 
+/**
+ * \brief Simulacre de fonction d'ordre supérieur pour tester une condition sur un article.
+ */
 struct condition_article : public std::unary_function<const article &, bool>
 {
-    virtual bool operator() (const article & a)
+    /**
+     * \brief Test d'un article.
+     * \param a Article à tester.
+     * \return Résultat du test.
+     */
+    virtual bool operator() (const article & a) const
     {
         return true;
     }
 };
 
-struct condition_int : virtual condition_article
+/**
+ * \brief Tester un article à l'aide d'un entier.
+ */
+struct condition_article_int : virtual condition_article
 {
-    unsigned int _valeur;
-    virtual unsigned int _valeur_article (const article & a) = 0;
-    bool operator() (const article & a)
+    unsigned int _valeur;   /**<- Valeur à comparer lors de l'application du test. */
+
+    /**
+     * \brief Obtenir l'information pertinente sur l'article.
+     * \param a Article.
+     * \return Information jugée pertinente.
+     */
+    virtual unsigned int _valeur_article (const article & a) const = 0;
+
+    bool operator() (const article & a) const
     {
         return _valeur_article (a) == _valeur;
     }
 };
 
-struct condition_modele : virtual condition_int
+/**
+ * \brief Tester si le modèle d'un article correspond.
+ */
+struct condition_article_modele : virtual condition_article_int
 {
-    condition_modele (unsigned int modele)
+    /**
+     * \brief Constructeur.
+     * \param modele Modèle recherché.
+     */
+    condition_article_modele (unsigned int modele)
     {
         _valeur = modele;
     }
-    unsigned int _valeur_article (const article & a)
+
+    unsigned int _valeur_article (const article & a) const
     {
         return a.modele ();
     }
 };
 
-struct condition_taille : virtual condition_int
+/**
+ * \brief Tester si la taille d'un article correspond.
+ */
+struct condition_article_taille : virtual condition_article_int
 {
-    condition_taille (unsigned int taille)
+    /**
+     * \brief Constructeur.
+     * \param taille Taille recherchée.
+     */
+    condition_article_taille (unsigned int taille)
     {
         _valeur = taille;
     }
-    unsigned int _valeur_article (const article & a)
+
+    unsigned int _valeur_article (const article & a) const
     {
         return a.taille ();
     }
 };
 
-struct condition_couleur : virtual condition_int
+/**
+ * \brief Tester si la couleur d'un article correspond.
+ */
+struct condition_article_couleur : virtual condition_article_int
 {
-    condition_couleur (unsigned int couleur)
+    /**
+     * \brief Constructeur.
+     * \param couleur Couleur recherchée.
+     */
+    condition_article_couleur (unsigned int couleur)
     {
         _valeur = couleur;
     }
-    unsigned int _valeur_article (const article & a)
+    unsigned int _valeur_article (const article & a) const
     {
         return a.couleur ();
     }
 };
 
-struct condition_bornes_float : virtual condition_article
+/**
+ * \brief Tester un article à l'aide de deux bornes.
+ */
+struct condition_article_bornes_double : virtual condition_article
 {
-    float _minimum;
-    float _maximum;
-    virtual float _valeur_article (const article & a) = 0;
-    bool operator() (const article & a)
+    double _minimum;    /**<- Borne inférieure. */
+    double _maximum;    /**<- Borne supérieure. */
+
+    /**
+     * \brief Obtenir l'information pertinente sur l'article.
+     * \param a Article.
+     * \return Information jugée pertinente.
+     */
+    virtual double _valeur_article (const article & a) const = 0;
+
+    bool operator() (const article & a) const
     {
-        float valeur = _valeur_article (a);
+        double valeur = _valeur_article (a);
         return valeur >= _minimum && valeur <= _maximum;
     }
 };
 
-struct condition_prix_achat : virtual condition_bornes_float
+/**
+ * \brief Tester si le prix d'achat d'un article est dans le bon intervalle.
+ */
+struct condition_article_prix_achat : virtual condition_article_bornes_double
 {
-    condition_prix_achat (float minimum, float maximum)
+    /**
+     * \brief Constructeur.
+     * \param minimum Borne inférieure.
+     * \param maximum Borne supérieure.
+     */
+    condition_article_prix_achat (double minimum, double maximum)
     {
         _minimum = minimum;
         _maximum = maximum;
     }
-    float _valeur_article (const article & a)
+    double _valeur_article (const article & a) const
     {
         return a.prix_achat ();
     }
 };
 
-struct condition_prix_vente : virtual condition_bornes_float
+/**
+ * \brief Tester si le prix de vente d'un article est dans le bon intervalle.
+ */
+struct condition_article_prix_vente : virtual condition_article_bornes_double
 {
-    condition_prix_vente (float minimum, float maximum)
+    /**
+     * \brief Constructeur.
+     * \param minimum Borne inférieure.
+     * \param maximum Borne supérieure.
+     */
+    condition_article_prix_vente (double minimum, double maximum)
     {
         _minimum = minimum;
         _maximum = maximum;
     }
-    float _valeur_article (const article & a)
+
+    double _valeur_article (const article & a) const
     {
         return a.prix_vente ();
     }
 };
 
-struct condition_date : virtual condition_article
+/**
+ * \brief Tester si la date d'un article correspond.
+ */
+struct condition_article_date : virtual condition_article
 {
-    date _date;
-    condition_date (const date & d)
+    date _date;     /**<- Date recherchée. */
+
+    /**
+     * \brief Constructeur.
+     * \param d Date recherchée.
+     */
+    condition_article_date (const date & d)
     {
         _date = d;
     }
-    bool operator() (const article & a)
+
+    bool operator() (const article & a) const
     {
         return a.date_livraison () == _date;
     }

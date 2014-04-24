@@ -20,6 +20,9 @@
 #include <istream>
 #include <algorithm>
 
+#include "date.hpp"
+#include "pourcentage.hpp"
+#include "reference_article.hpp"
 #include "article.hpp"
 #include "article_stock.hpp"
 
@@ -131,7 +134,16 @@ public:
      */
     bool vide (void) const;
 
+    /**
+     * \brief Itérateur vers le début du stock.
+     * \return Itérateur.
+     */
     stock_const_iterator begin (void) const;
+
+    /**
+     * \brief Itérateur vers la fin du stock.
+     * \return Itérateur.
+     */
     stock_const_iterator end (void) const;
 
     /**

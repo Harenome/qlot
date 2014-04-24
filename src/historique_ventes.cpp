@@ -59,9 +59,9 @@ unsigned int historique_ventes::nombre_ventes (void) const
     return _ventes.size ();
 }
 
-float historique_ventes::total (void) const
+double historique_ventes::total (void) const
 {
-    float somme = 0.0;
+    double somme = 0.0;
     for (historique_ventes_const_iterator it = _ventes.begin (); it != _ventes.end (); ++it)
         somme += it->second.total ();
     return somme;

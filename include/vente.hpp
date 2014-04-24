@@ -18,6 +18,7 @@
 #include <map>
 
 #include "date.hpp"
+#include "reference_article.hpp"
 #include "article.hpp"
 #include "article_vendu.hpp"
 
@@ -27,6 +28,8 @@
 
 typedef std::pair<unsigned int, article_vendu> vente_element;
 typedef std::map<unsigned int, article_vendu> vente_map;
+typedef vente_map::iterator vente_iterator;
+typedef vente_map::const_iterator vente_const_iterator;
 
 ////////////////////////////////////////////////////////////////////////////////
 // Classe.
@@ -81,14 +84,42 @@ public:
     /**
      * \brief Déterminer si un article a été vendu lors de cette vente.
      * \param reference Référence.
+     * \retval true Si l'article a été vendu.
+     * \retval false Sinon.
      */
-    bool vendu (unsigned int reference) const;
+    bool vendu_article (unsigned int reference) const;
 
     /**
      * \brief Déterminer si un article a été vendu lors de cette vente.
      * \param reference Référence.
+     * \retval true Si l'article a été vendu.
+     * \retval false Sinon.
      */
-    bool vendu (const reference_article & reference) const;
+    bool vendu_article (const reference_article & reference) const;
+
+    /**
+     * \brief Déterminer si un modèle a été vendu lors de cette vente.
+     * \param modele Modèle.
+     * \retval true Si un article de ce modèle a été vendu.
+     * \retval false Sinon.
+     */
+    bool vendu_modele (unsigned int modele) const;
+
+    /**
+     * \brief Déterminer si une taille a été vendu lors de cette vente.
+     * \param taille Taille.
+     * \retval true Si un article de cette taille a été vendu.
+     * \retval false Sinon.
+     */
+    bool vendu_taille (unsigned int taille) const;
+
+    /**
+     * \brief Déterminer si un modèle a été vendu lors de cette vente.
+     * \param couleur Couleur.
+     * \retval true Si un article de ce modèle a été vendu.
+     * \retval false Sinon.
+     */
+    bool vendu_couleur (unsigned int couleur) const;
 
     /**
      * \brief Opérateur \c [].
@@ -124,7 +155,7 @@ public:
      * \brief Obtenir le prix total payé lors de la vente.
      * \return Total.
      */
-    float total (void) const;
+    double total (void) const;
 
     /**
      * \brief Ajouter un article vendu à la vent.

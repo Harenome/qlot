@@ -16,7 +16,6 @@
 #include <algorithm>
 
 #include "reference_article.hpp"
-#include "article.hpp"
 
 ////////////////////////////////////////////////////////////////////////////////
 // Classe.
@@ -51,7 +50,7 @@ public:
      * \param quantite Quantité vendue.
      * \param prix Prix de vente effectif.
      */
-    article_vendu (const reference_article & reference, unsigned int quantite, float prix);
+    article_vendu (const reference_article & reference, unsigned int quantite, double prix);
 
     /**
      * \brief Obtenir la quantité vendue.
@@ -63,13 +62,13 @@ public:
      * \brief Obtenir le prix de vente.
      * \return Prix de vente.
      */
-    float prix (void) const;
+    double prix (void) const;
 
     /**
      * \brief Obtenir le total payé pour cet article.
      * \return Total.
      */
-    float total (void) const;
+    double total (void) const;
 
     /**
      * \brief Modifier la référence.
@@ -93,7 +92,7 @@ public:
      * \brief Modifier le prix de vente effectif.
      * \param prix Prix de vente effectif.
      */
-    void modifier_prix (float prix);
+    void modifier_prix (double prix);
 
     /**
      * \brief Obtenir la référence de l'article qui a été vendu.
@@ -115,10 +114,16 @@ public:
 
 private:
     reference_article _reference;   /**<- Référence article. */
-    float _prix;                    /**<- Prix de vente effectif. */
+    double _prix;                    /**<- Prix de vente effectif. */
     unsigned int _quantite;         /**<- Quantité vendue. */
 
-    void _initialiser (const reference_article & reference, unsigned int quantite, float prix);
+    /**
+     * \brief Initialiser.
+     * \param reference Référence.
+     * \param quantite Quantité.
+     * \param prix Prix.
+     */
+    void _initialiser (const reference_article & reference, unsigned int quantite, double prix);
 };
 
 ////////////////////////////////////////////////////////////////////////////////

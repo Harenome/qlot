@@ -56,9 +56,32 @@ unsigned int magasin::nombre_ventes (void) const
     return _historique.nombre_ventes ();
 }
 
-float magasin::total_ventes (void) const
+double magasin::frais (void) const
 {
-    float somme = 0.0;
+    double somme = 0.0;
+    for (articles_existants_const_iterator it = _articles.begin (); it != _articles.end (); ++it)
+    {
+        const article & a = it->second;
+        double prix_achat = a.prix_achat ();
+        unsigned int reference = a.reference ().vers_entier ();
+
+        somme += prix_achat * _stock[reference].quantite_stock ();
+        for (historique_ventes_const_iterator j = _historique.begin (); j != _historique.end (); ++j)
+            if (j->second.vendu_article (reference))
+                somme += prix_achat * j->second[reference].quantite_vendue ();
+    }
+
+    return somme;
+}
+
+double magasin::benefices (void) const
+{
+    return chiffre_d_affaires () - frais ();
+}
+
+double magasin::chiffre_d_affaires (void) const
+{
+    double somme = 0.0;
     for (historique_ventes_const_iterator it = _historique.begin (); it != _historique.end (); ++it)
             somme += it->second.total ();
     return somme;
@@ -74,8 +97,36 @@ article_affichage magasin::operator[] (const reference_article & reference) cons
 {
     return operator[] (reference.vers_entier ());
 }
+std::vector<reference_article> magasin::references (void) const
+{
+    std::vector<reference_article> v;
 
-std::vector<article_affichage> magasin::_articles_par_condition (condition_article condition) const
+    for (articles_existants_const_iterator it = _articles.begin (); it != _articles.end (); ++it)
+    {
+        reference_article r = it->second.reference ();
+        v.push_back (r);
+    }
+
+    return v;
+}
+
+std::vector<reference_article> magasin::references_en_stock (void) const
+{
+    std::vector<reference_article> v;
+
+    for (articles_existants_const_iterator it = _articles.begin (); it != _articles.end (); ++it)
+    {
+        const article & article_courant = it->second;
+        reference_article r = article_courant.reference ();
+        const article_stock & article_stock_courant = _stock[r];
+        if (article_stock_courant.quantite_stock () > 0)
+            v.push_back (r);
+    }
+
+    return v;
+}
+
+std::vector<article_affichage> magasin::_articles_par_condition (const condition_article & condition) const
 {
     std::vector<article_affichage> articles;
 
@@ -93,40 +144,131 @@ std::vector<article_affichage> magasin::_articles_par_condition (condition_artic
     return articles;
 }
 
+std::vector<article_affichage> magasin::articles_en_stock (void) const
+{
+    std::vector<article_affichage> v;
+
+    for (articles_existants_const_iterator it = _articles.begin (); it != _articles.end (); ++it)
+    {
+        const article & article_courant = it->second;
+        reference_article r = article_courant.reference ();
+        const article_stock & article_stock_courant = _stock[r];
+        if (article_stock_courant.quantite_stock () > 0)
+        {
+            article_affichage a (article_courant, article_stock_courant);
+            v.push_back (a);
+        }
+    }
+
+    return v;
+}
+
+std::vector<article_affichage> magasin::articles (void) const
+{
+    condition_article condition;
+    return _articles_par_condition (condition);
+}
+
 std::vector<article_affichage> magasin::articles_par_modele (unsigned int modele) const
 {
-    condition_modele condition (modele);
+    condition_article_modele condition (modele);
     return _articles_par_condition (condition);
 }
 
 std::vector<article_affichage> magasin::articles_par_taille (unsigned int taille) const
 {
-    condition_taille condition (taille);
+    condition_article_taille condition (taille);
     return _articles_par_condition (condition);
 }
 
 std::vector<article_affichage> magasin::articles_par_couleur (unsigned int couleur) const
 {
-    condition_couleur condition (couleur);
+    condition_article_couleur condition (couleur);
     return _articles_par_condition (condition);
 }
 
 std::vector<article_affichage> magasin::articles_par_date (const date & date_livraison) const
 {
-    condition_date condition (date_livraison);
+    condition_article_date condition (date_livraison);
     return _articles_par_condition (condition);
 }
 
-std::vector<article_affichage> magasin::articles_par_prix_achat (float minimum, float maximum) const
+std::vector<article_affichage> magasin::articles_par_prix_achat (double minimum, double maximum) const
 {
-    condition_prix_achat condition (minimum, maximum);
+    condition_article_prix_achat condition (minimum, maximum);
     return _articles_par_condition (condition);
 }
 
-std::vector<article_affichage> magasin::articles_par_prix_vente (float minimum, float maximum) const
+std::vector<article_affichage> magasin::articles_par_prix_vente (double minimum, double maximum) const
 {
-    condition_prix_vente condition (minimum, maximum);
+    condition_article_prix_vente condition (minimum, maximum);
     return _articles_par_condition (condition);
+}
+
+std::vector<article_affichage> magasin::articles_par_prix_effectif (double minimum, double maximum) const
+{
+    std::vector<article_affichage> articles;
+
+    for (articles_existants_const_iterator it = _articles.begin (); it != _articles.end (); ++it)
+    {
+        const article & article_courant = it->second;
+        unsigned int reference = article_courant.reference ().vers_entier ();
+        article_affichage a (article_courant, _stock[reference]);
+        float prix = a.prix_vente_effectif ();
+        if (prix >= minimum && prix <= maximum)
+            articles.push_back (a);
+    }
+
+    return articles;
+}
+
+std::vector<vente> magasin::_ventes_par_condition (const condition_vente & condition) const
+{
+    std::vector<vente> ventes;
+    for (historique_ventes_const_iterator it = _historique.begin (); it != _historique.end (); ++it)
+    {
+        const vente & v = it->second;
+        if (condition (v))
+            ventes.push_back (v);
+
+    }
+    return ventes;
+}
+
+std::vector<vente> magasin::ventes_par_date (const date & d) const
+{
+    condition_vente_date condition (d);
+    return _ventes_par_condition (condition);
+}
+
+std::vector<vente> magasin::ventes_par_reference (const reference_article & reference) const
+{
+    condition_vente_reference condition (reference);
+    return _ventes_par_condition (condition);
+}
+
+std::vector<vente> magasin::ventes_par_reference (unsigned int reference) const
+{
+    condition_vente_reference condition (reference);
+    return _ventes_par_condition (condition);
+}
+
+std::vector<vente> magasin::ventes_par_modele (unsigned int modele) const
+{
+    condition_vente_modele condition (modele);
+    return _ventes_par_condition (condition);
+}
+
+std::vector<vente> magasin::ventes_par_taille (unsigned int taille) const
+{
+    condition_vente_taille condition (taille);
+    return _ventes_par_condition (condition);
+}
+
+std::vector<vente> magasin::ventes_par_couleur (unsigned int couleur) const
+{
+    condition_vente_couleur condition (couleur);
+    return _ventes_par_condition (condition);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -234,18 +376,18 @@ void magasin::modifier_rabais_article (const reference_article & reference, cons
     modifier_rabais_article (reference.vers_entier (), rabais);
 }
 
-void magasin::modifier_prix_achat_article (unsigned int reference, float prix)
+void magasin::modifier_prix_achat_article (unsigned int reference, double prix)
 {
     if (_articles.existe (reference))
         _articles[reference].modifier_prix_achat (prix);
 }
 
-void magasin::modifier_prix_achat_article (const reference_article & reference, float prix)
+void magasin::modifier_prix_achat_article (const reference_article & reference, double prix)
 {
     modifier_prix_achat_article (reference.vers_entier (), prix);
 }
 
-void magasin::modifier_prix_vente_article (unsigned int reference, float prix)
+void magasin::modifier_prix_vente_article (unsigned int reference, double prix)
 {
     if (_articles.existe (reference))
         _articles[reference].modifier_prix_vente (prix);
@@ -297,7 +439,7 @@ void magasin::modifier_date_vente (unsigned int id, unsigned int jour, unsigned 
 
 void magasin::annuler_vente_article (unsigned int id, unsigned int reference)
 {
-    if (_historique.existe (id) && _historique[id].vendu (reference))
+    if (_historique.existe (id) && _historique[id].vendu_article (reference))
             _historique[id].retirer_article_vendu (reference);
 }
 
@@ -310,7 +452,7 @@ void magasin::modifier_vente_article_quantite (unsigned int id, unsigned int ref
 {
     if (quantite == 0)
         annuler_vente_article (id, reference);
-    else if (_historique.existe (id) && _historique[id].vendu (reference))
+    else if (_historique.existe (id) && _historique[id].vendu_article (reference))
         _historique[id][reference].modifier_quantite_vendue (quantite);
 }
 
@@ -319,13 +461,13 @@ void magasin::modifier_vente_article_quantite (unsigned int id, const reference_
     modifier_vente_article_quantite (id, reference.vers_entier (), quantite);
 }
 
-void magasin::modifier_vente_article_prix (unsigned int id, unsigned int reference, float prix)
+void magasin::modifier_vente_article_prix (unsigned int id, unsigned int reference, double prix)
 {
-    if (_historique.existe (id) && _historique[id].vendu (reference))
+    if (_historique.existe (id) && _historique[id].vendu_article (reference))
         _historique[id][reference].modifier_prix (prix);
 }
 
-void magasin::modifier_vente_article_prix (unsigned int id, const reference_article & reference, float prix)
+void magasin::modifier_vente_article_prix (unsigned int id, const reference_article & reference, double prix)
 {
     modifier_vente_article_prix (id, reference.vers_entier (), prix);
 }
@@ -380,7 +522,7 @@ std::ostream & operator<< (std::ostream & os, const magasin & m)
     return m.ecrire_vers (os);
 }
 
-std::istream & operator<< (std::istream & is, magasin & m)
+std::istream & operator>> (std::istream & is, magasin & m)
 {
     stock nouveau_stock;
     articles_existants nouveaux_articles;
