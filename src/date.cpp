@@ -59,7 +59,7 @@ date::date (void)
 
 date::date (const date & d)
 {
-    operator= (d);
+    _date = d._date;
 }
 
 date::date (int jour, int mois, int annee)

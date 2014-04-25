@@ -24,7 +24,7 @@ historique_ventes::historique_ventes (void)
 
 historique_ventes::historique_ventes (const historique_ventes & h)
 {
-    operator= (h);
+    _ventes = h._ventes;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

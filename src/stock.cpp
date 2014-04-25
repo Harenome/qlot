@@ -25,7 +25,7 @@ stock::stock (void)
 
 stock::stock (const stock & s)
 {
-    operator= (s);
+    _stock = s._stock;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
