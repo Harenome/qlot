@@ -34,7 +34,7 @@
    </property>
    <widget class="QPushButton" name="ajout_marchandise_button">
     <property name="enabled">
-     <bool>false</bool>
+     <bool>true</bool>
     </property>
     <property name="text">
      <string>Ajouter</string>
@@ -46,34 +46,12 @@
     </property>
    </widget>
   </widget>
-  <widget class="QSplitter" name="splitter_2">
-   <property name="geometry">
-    <rect>
-     <x>70</x>
-     <y>20</y>
-     <width>221</width>
-     <height>27</height>
-    </rect>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Horizontal</enum>
-   </property>
-   <widget class="QLabel" name="label">
-    <property name="text">
-     <string>Modèle</string>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="modele_edit"/>
-  </widget>
   <widget class="QSplitter" name="splitter_4">
    <property name="geometry">
     <rect>
-     <x>40</x>
+     <x>50</x>
      <y>100</y>
-     <width>251</width>
+     <width>241</width>
      <height>27</height>
     </rect>
    </property>
@@ -106,9 +84,9 @@
   <widget class="QSplitter" name="splitter_7">
    <property name="geometry">
     <rect>
-     <x>20</x>
+     <x>-30</x>
      <y>220</y>
-     <width>271</width>
+     <width>321</width>
      <height>27</height>
     </rect>
    </property>
@@ -141,9 +119,9 @@
   <widget class="QSplitter" name="splitter_5">
    <property name="geometry">
     <rect>
-     <x>40</x>
+     <x>-80</x>
      <y>140</y>
-     <width>251</width>
+     <width>371</width>
      <height>27</height>
     </rect>
    </property>
@@ -190,33 +168,21 @@
      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
     </property>
    </widget>
-   <widget class="QDoubleSpinBox" name="doubleSpinBox_rabais">
-    <property name="prefix">
-     <string>- </string>
-    </property>
+   <widget class="QSpinBox" name="spinBox_rabais">
     <property name="suffix">
      <string>%</string>
     </property>
-    <property name="minimum">
-     <double>0.000000000000000</double>
-    </property>
-    <property name="maximum">
-     <double>99.989999999999995</double>
-    </property>
-    <property name="singleStep">
-     <double>0.010000000000000</double>
-    </property>
-    <property name="value">
-     <double>0.000000000000000</double>
+    <property name="prefix">
+     <string>-</string>
     </property>
    </widget>
   </widget>
   <widget class="QSplitter" name="splitter_3">
    <property name="geometry">
     <rect>
-     <x>20</x>
+     <x>40</x>
      <y>60</y>
-     <width>271</width>
+     <width>251</width>
      <height>27</height>
     </rect>
    </property>
@@ -352,9 +318,9 @@
   <widget class="QSplitter" name="splitter_8">
    <property name="geometry">
     <rect>
-     <x>20</x>
+     <x>-50</x>
      <y>260</y>
-     <width>271</width>
+     <width>341</width>
      <height>27</height>
     </rect>
    </property>
@@ -387,9 +353,9 @@
   <widget class="QSplitter" name="splitter_6">
    <property name="geometry">
     <rect>
-     <x>0</x>
+     <x>-60</x>
      <y>180</y>
-     <width>291</width>
+     <width>351</width>
      <height>27</height>
     </rect>
    </property>
@@ -421,6 +387,38 @@
     </property>
     <property name="calendarPopup">
      <bool>true</bool>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QSplitter" name="splitter_2">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>20</y>
+     <width>291</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+   <widget class="QLabel" name="label">
+    <property name="text">
+     <string>Modèle</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="spinBox_modele">
+    <property name="prefix">
+     <string>n° </string>
+    </property>
+    <property name="minimum">
+     <number>1</number>
+    </property>
+    <property name="maximum">
+     <number>9999</number>
     </property>
    </widget>
   </widget>

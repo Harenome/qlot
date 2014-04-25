@@ -6,6 +6,7 @@
 #include "versiondialog.h"
 #include "ajoutmarchandisedialog.h"
 #include "ajoutventedialog.h"
+#include "es.hpp"
 
 namespace Ui {
 class MainWindow;
@@ -18,6 +19,8 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+
+    magasin m;
     
 private:
     Ui::MainWindow *ui;

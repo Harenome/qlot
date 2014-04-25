@@ -2,6 +2,7 @@
 #define AJOUTMARCHANDISEDIALOG_H
 
 #include <QDialog>
+#include "mainwindow.h"
 
 namespace Ui {
 class AjoutMarchandiseDialog;
@@ -17,6 +18,9 @@ public:
     
 private:
     Ui::AjoutMarchandiseDialog *ui;
+
+private slots:
+    void validation();
 };
 
 #endif // AJOUTMARCHANDISEDIALOG_H
