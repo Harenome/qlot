@@ -16,11 +16,16 @@
 #define __VENTE_HPP__
 
 #include <map>
+#include <vector>
+#include <ostream>
+#include <istream>
+#include <algorithm>
 
 #include "date.hpp"
 #include "reference_article.hpp"
 #include "article.hpp"
 #include "article_vendu.hpp"
+#include "article_vendu_affichage.hpp"
 
 ////////////////////////////////////////////////////////////////////////////////
 // Typedefs.
@@ -80,6 +85,12 @@ public:
      * \brief Obtenir le nombre d'articles vendus.
      */
     unsigned int quantite_articles_vendus (void) const;
+
+    /**
+     * \brief Obtenir les articles vendus.
+     * \return Articles vendus.
+     */
+    std::vector<article_vendu_affichage> articles_vendus (void) const;
 
     /**
      * \brief Déterminer si un article a été vendu lors de cette vente.

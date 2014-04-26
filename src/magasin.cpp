@@ -177,6 +177,9 @@ std::vector<article_affichage> magasin::articles_en_stock (void) const
 
 std::vector<article_affichage> magasin::articles (void) const
 {
+    /* Une condition_article non spécialisée retourne toujours true !
+     * On peut faire plus propre. Oui...
+     */
     condition_article condition;
     return _articles_par_condition (condition);
 }
@@ -234,6 +237,16 @@ std::vector<article_affichage> magasin::articles_par_prix_effectif (double minim
     return articles;
 }
 
+bool magasin::vente_existe (unsigned int id) const
+{
+    return _historique.existe (id);
+}
+
+vente magasin::vente_id (unsigned int id) const
+{
+    return _historique[id];
+}
+
 std::vector<vente> magasin::_ventes_par_condition (const condition_vente & condition) const
 {
     std::vector<vente> ventes;
@@ -245,6 +258,12 @@ std::vector<vente> magasin::_ventes_par_condition (const condition_vente & condi
 
     }
     return ventes;
+}
+
+std::vector<vente> magasin::ventes (void) const
+{
+    condition_vente condition;
+    return _ventes_par_condition (condition);
 }
 
 std::vector<vente> magasin::ventes_par_date (const date & d) const

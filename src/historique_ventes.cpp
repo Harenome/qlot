@@ -39,7 +39,7 @@ historique_ventes::~historique_ventes (void)
 // Sélecteurs.
 ////////////////////////////////////////////////////////////////////////////////
 
-bool historique_ventes::existe (unsigned int id)
+bool historique_ventes::existe (unsigned int id) const
 {
     return _ventes.count (id) == 1;
 }
