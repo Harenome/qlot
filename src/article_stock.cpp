@@ -101,7 +101,7 @@ void article_stock::modifier_quantite_stock (unsigned int quantite)
 void article_stock::swap (article_stock & a)
 {
     std::swap (_quantite_stock, a._quantite_stock);
-    _rabais.swap (a._rabais);
+    _reference.swap (a._reference);
     _rabais.swap (a._rabais);
 }
 

@@ -114,6 +114,13 @@ public:
      */
     article_affichage & operator= (article_affichage a);
 
+    /**
+     * \brief Écrire vers un flux de sortie.
+     * \param[in,out] os Flux de sortie.
+     * \return \c os.
+     */
+    std::ostream & ecrire_vers (std::ostream & os) const;
+
 private:
     article _article;               /**<- Article. */
     article_stock _article_stock;   /**<- Infos sur le stock de l'article. */
@@ -122,6 +129,14 @@ private:
 ////////////////////////////////////////////////////////////////////////////////
 // Fonctions non membres.
 ////////////////////////////////////////////////////////////////////////////////
+
+/**
+ * \brief Opérateur \c <<.
+ * \param[in,out] os Flux de sortie.
+ * \param[in] a Article affichage.
+ * \return \c os.
+ */
+std::ostream & operator<< (std::ostream & os, const article_affichage & a);
 
 /**
  * \brief Échanger deux articles affichage.

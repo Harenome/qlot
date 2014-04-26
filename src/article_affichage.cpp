@@ -69,7 +69,9 @@ double article_affichage::prix_vente (void) const
 
 double article_affichage::prix_vente_effectif (void) const
 {
-    return rabais ().appliquer_a (prix_vente ());
+    double prix = prix_vente ();
+    prix -= rabais ().appliquer_a (prix);
+    return prix;
 }
 
 unsigned int article_affichage::quantite_stock (void) const
@@ -96,4 +98,20 @@ article_affichage & article_affichage::operator= (article_affichage a)
 {
     this->swap (a);
     return * this;
+}
+
+std::ostream & article_affichage::ecrire_vers (std::ostream & os) const
+{
+    os << _article << " ";
+    os << quantite_stock () << " " << rabais () << " " << prix_vente_effectif ();
+    return os;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// Fonctions non membres.
+////////////////////////////////////////////////////////////////////////////////
+
+std::ostream & operator<< (std::ostream & os, const article_affichage & a)
+{
+    return a.ecrire_vers (os);
 }
