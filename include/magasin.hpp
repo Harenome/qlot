@@ -147,6 +147,21 @@ public:
     article_affichage operator[] (const reference_article & reference) const;
 
     /**
+     * \brief Vérifier qu'une vente existe.
+     * \param id ID.
+     * \retval true Si la vente existe.
+     * \retval false Sinon.
+     */
+    bool vente_existe (unsigned int id) const;
+
+    /**
+     * \brief Obtenir une vente.
+     * \param id ID.
+     * \return vente.
+     */
+    vente vente_id (unsigned int id) const;
+
+    /**
      * \brief Obtenir tous les articles.
      * \return Articles.
      */
@@ -221,6 +236,12 @@ public:
      * \return Articles qui correspondent.
      */
     std::vector<article_affichage> articles_par_prix_effectif (double minimum, double maximum) const;
+
+    /**
+     * \brief Obtenir les ventes.
+     * \return Ventes qui correspondent.
+     */
+    std::vector<vente> ventes (void) const;
 
     /**
      * \brief Obtenir les ventes dont la date correspond.

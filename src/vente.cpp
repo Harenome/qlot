@@ -78,6 +78,18 @@ date vente::date_vente (void) const
     return _date_vente;
 }
 
+std::vector<article_vendu_affichage> vente::articles_vendus (void) const
+{
+    std::vector<article_vendu_affichage> vendus;
+    for (vente_const_iterator it = _articles_vendus.begin (); it != _articles_vendus.end (); ++it)
+    {
+        article_vendu_affichage a (id (), it->second);
+        vendus.push_back (a);
+    }
+
+    return vendus;
+}
+
 unsigned int vente::quantite_articles_vendus (void) const
 {
     return _articles_vendus.size ();

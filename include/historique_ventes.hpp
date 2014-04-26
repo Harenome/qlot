@@ -106,7 +106,7 @@ public:
      * \brief Déterminer si une vente existe.
      * \param id ID.
      */
-    bool existe (unsigned int id);
+    bool existe (unsigned int id) const;
 
     /**
      * \brief Opérateur \c [].
