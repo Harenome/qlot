@@ -192,6 +192,16 @@ void vente::remplacer_reference (const reference_article & ancienne_reference, c
 // Divers.
 ////////////////////////////////////////////////////////////////////////////////
 
+vente_const_iterator vente::begin (void) const
+{
+    return _articles_vendus.begin ();
+}
+
+vente_const_iterator vente::end (void) const
+{
+    return _articles_vendus.end ();
+}
+
 vente & vente::operator= (vente v)
 {
     this->swap (v);

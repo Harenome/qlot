@@ -275,6 +275,8 @@ public:
     /**
      * \brief Ajouter une vente.
      * \param v Vente.
+     * Lors de l'ajout d'une vente, le stock est automatiquement modifié en conséquence.
+     * C'est-à-dire que le stock des articles vendus lors de cette vente sera diminué.
      */
     void ajouter_vente (const vente & v);
 
@@ -437,12 +439,14 @@ public:
     /**
      * \brief Annuler une vente.
      * \param v Vente.
+     * L'annulation d'une vente restaure en stock les articles précédemment vendus.
      */
     void annuler_vente (const vente & v);
 
     /**
      * \brief Annuler une vente.
      * \param id Id.
+     * L'annulation d'une vente restaure en stock les articles précédemment vendus.
      */
     void annuler_vente (unsigned int id);
 
@@ -473,6 +477,7 @@ public:
      * \brief Annuler la vente d'un article.
      * \param id_vente ID de la vente.
      * \param reference Référence de l'article.
+     * L'annulation d'une vente restaure le stock.
      */
     void annuler_vente_article (unsigned int id_vente, const reference_article & reference);
 
@@ -481,6 +486,7 @@ public:
      * \param id ID de la vente.
      * \param reference Référence de l'article.
      * \param quantite Quantité.
+     * Le stock sera modifié en conséquence.
      */
     void modifier_vente_article_quantite (unsigned int id, unsigned int reference, unsigned int quantite);
 
@@ -489,6 +495,7 @@ public:
      * \param id ID de la vente.
      * \param reference Référence de l'article.
      * \param quantite Quantité.
+     * Le stock sera modifié en conséquence.
      */
     void modifier_vente_article_quantite (unsigned int id, const reference_article & reference, unsigned int quantite);
 
