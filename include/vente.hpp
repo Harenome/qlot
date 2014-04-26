@@ -146,6 +146,18 @@ public:
     const article_vendu & operator[] (const reference_article & reference) const;
 
     /**
+     * \brief Obtenir un itérateur vers le début.
+     * \return Itérateur.
+     */
+    vente_const_iterator begin (void) const;
+
+    /**
+     * \brief Obtenir un itérateur vers la fin.
+     * \return Itérateur.
+     */
+    vente_const_iterator end (void) const;
+
+    /**
      * \brief Obtenir l'ID de la vente.
      * \return ID.
      */

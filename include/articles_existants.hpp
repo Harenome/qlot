@@ -101,7 +101,7 @@ public:
      * \retval true Si un article portant cette référence existe.
      * \retval false Sinon.
      */
-    bool existe (const reference_article & reference);
+    bool existe (const reference_article & reference) const;
 
     /**
      * \brief Déterminer si un article existe.
@@ -109,7 +109,7 @@ public:
      * \retval true Si un article portant cette référence existe.
      * \retval false Sinon.
      */
-    bool existe (unsigned int reference);
+    bool existe (unsigned int reference) const;
 
     /**
      * \brief Obtenir le nombre d'articles existants.
