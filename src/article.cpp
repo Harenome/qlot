@@ -41,7 +41,8 @@ article::article (void)
 
 article::article (const article & a)
 {
-    operator= (a);
+    _initialiser (a.reference (), a.prix_achat (), a.prix_vente ());
+    _date_livraison = a.date_livraison ();
 }
 
 article::article (const reference_article & reference, double prix_achat, double prix_vente)

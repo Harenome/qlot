@@ -24,7 +24,8 @@ article_affichage::article_affichage (void)
 
 article_affichage::article_affichage (const article_affichage & a)
 {
-    operator= (a);
+    _article = a._article;
+    _article_stock = a._article_stock;
 }
 
 article_affichage::article_affichage (const article & a, const article_stock & s)

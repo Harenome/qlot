@@ -24,7 +24,7 @@ articles_existants::articles_existants (void)
 
 articles_existants::articles_existants (const articles_existants & a)
 {
-    operator= (a);
+    _articles = a._articles;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

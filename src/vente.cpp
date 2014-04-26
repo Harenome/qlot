@@ -43,7 +43,9 @@ vente::vente (unsigned int id, const date & date_vente)
 
 vente::vente (const vente & v)
 {
-    operator= (v);
+    _id = v._id;
+    _date_vente = v._date_vente;
+    _articles_vendus = v._articles_vendus;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

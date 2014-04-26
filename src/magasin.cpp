@@ -24,7 +24,9 @@ magasin::magasin (void)
 
 magasin::magasin (const magasin & m)
 {
-    operator= (m);
+    _articles = m._articles;
+    _stock = m._stock;
+    _historique = m._historique;
 }
 
 magasin::magasin (const articles_existants & a, const stock & s, const historique_ventes & h)

@@ -24,7 +24,9 @@ article_stock::article_stock (void)
 
 article_stock::article_stock (const article_stock & a)
 {
-    operator= (a);
+    _reference = a.reference ();
+    _quantite_stock = a.quantite_stock ();
+    _rabais = a.rabais ();
 }
 
 article_stock::article_stock (const reference_article & reference, unsigned int quantite, const pourcentage & rabais)
