@@ -24,7 +24,9 @@ magasin::magasin (void)
 
 magasin::magasin (const magasin & m)
 {
-    operator= (m);
+    _articles = m._articles;
+    _stock = m._stock;
+    _historique = m._historique;
 }
 
 magasin::magasin (const articles_existants & a, const stock & s, const historique_ventes & h)
@@ -45,6 +47,16 @@ magasin::~magasin (void)
 ////////////////////////////////////////////////////////////////////////////////
 // Sélecteurs.
 ////////////////////////////////////////////////////////////////////////////////
+
+bool magasin::article_existe (unsigned int reference) const
+{
+    return _articles.existe (reference);
+}
+
+bool magasin::article_existe (const reference_article & reference) const
+{
+    return article_existe (reference.vers_entier ());
+}
 
 unsigned int magasin::nombre_articles (void) const
 {
@@ -165,6 +177,9 @@ std::vector<article_affichage> magasin::articles_en_stock (void) const
 
 std::vector<article_affichage> magasin::articles (void) const
 {
+    /* Une condition_article non spécialisée retourne toujours true !
+     * On peut faire plus propre. Oui...
+     */
     condition_article condition;
     return _articles_par_condition (condition);
 }
@@ -222,6 +237,16 @@ std::vector<article_affichage> magasin::articles_par_prix_effectif (double minim
     return articles;
 }
 
+bool magasin::vente_existe (unsigned int id) const
+{
+    return _historique.existe (id);
+}
+
+vente magasin::vente_id (unsigned int id) const
+{
+    return _historique[id];
+}
+
 std::vector<vente> magasin::_ventes_par_condition (const condition_vente & condition) const
 {
     std::vector<vente> ventes;
@@ -233,6 +258,12 @@ std::vector<vente> magasin::_ventes_par_condition (const condition_vente & condi
 
     }
     return ventes;
+}
+
+std::vector<vente> magasin::ventes (void) const
+{
+    condition_vente condition;
+    return _ventes_par_condition (condition);
 }
 
 std::vector<vente> magasin::ventes_par_date (const date & d) const
@@ -284,6 +315,14 @@ void magasin::ajouter_article (const article & a, unsigned int quantite, const p
 void magasin::ajouter_vente (const vente & v)
 {
     _historique.ajouter_vente (v);
+    for (vente_const_iterator it = v.begin (); it != v.end (); ++it)
+    {
+        article_vendu a = it->second;
+        reference_article r = a.reference ();
+        unsigned int ancien_stock = _stock[r].quantite_stock ();
+
+        modifier_quantite_article (r,  ancien_stock - a.quantite_vendue ());
+    }
 }
 
 void magasin::_modificateur_reference (unsigned int reference, unsigned int valeur,
@@ -417,11 +456,21 @@ void magasin::modifier_date_livraison_article (const reference_article & referen
 
 void magasin::annuler_vente (const vente & v)
 {
-    _historique.retirer_vente (v);
+    annuler_vente (v.id ());
 }
 
 void magasin::annuler_vente (unsigned int id)
 {
+    vente ancienne_vente = _historique[id];
+    for (vente_const_iterator it = ancienne_vente.begin (); it != ancienne_vente.end (); ++it)
+    {
+        article_vendu a = it->second;
+        reference_article r = a.reference ();
+        unsigned int ancien_stock = _stock[r].quantite_stock ();
+
+        modifier_quantite_article (r,  ancien_stock + a.quantite_vendue ());
+    }
+
     _historique.retirer_vente (id);
 }
 
@@ -439,8 +488,13 @@ void magasin::modifier_date_vente (unsigned int id, unsigned int jour, unsigned 
 
 void magasin::annuler_vente_article (unsigned int id, unsigned int reference)
 {
-    if (_historique.existe (id) && _historique[id].vendu_article (reference))
-            _historique[id].retirer_article_vendu (reference);
+    if (_historique.existe (id) && _historique[id].vendu_article (reference) && article_existe (reference))
+    {
+        unsigned int vendu = _historique[id][reference].quantite_vendue ();
+        unsigned int nouveau_stock = _stock[reference].quantite_stock () + vendu;
+        _historique[id].retirer_article_vendu (reference);
+        _stock[reference].modifier_quantite_stock (nouveau_stock);
+    }
 }
 
 void magasin::annuler_vente_article (unsigned int id, const reference_article & reference)
@@ -453,7 +507,12 @@ void magasin::modifier_vente_article_quantite (unsigned int id, unsigned int ref
     if (quantite == 0)
         annuler_vente_article (id, reference);
     else if (_historique.existe (id) && _historique[id].vendu_article (reference))
+    {
+        unsigned int annule = _historique[id][reference].quantite_vendue () - quantite;
+        unsigned int nouveau_stock = _stock[reference].quantite_stock () + annule;
         _historique[id][reference].modifier_quantite_vendue (quantite);
+        _stock[reference].modifier_quantite_stock (nouveau_stock);
+    }
 }
 
 void magasin::modifier_vente_article_quantite (unsigned int id, const reference_article & reference, unsigned int quantite)

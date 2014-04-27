@@ -197,12 +197,15 @@
          </spacer>
         </item>
         <item>
-         <widget class="QLineEdit" name="prix_total_vente">
-          <property name="text">
-           <string>0,00</string>
-          </property>
+         <widget class="QDoubleSpinBox" name="doubleSpinBox_prix_total">
           <property name="readOnly">
            <bool>true</bool>
+          </property>
+          <property name="suffix">
+           <string>€</string>
+          </property>
+          <property name="maximum">
+           <double>99999.990000000005239</double>
           </property>
          </widget>
         </item>

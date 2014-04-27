@@ -24,7 +24,7 @@ historique_ventes::historique_ventes (void)
 
 historique_ventes::historique_ventes (const historique_ventes & h)
 {
-    operator= (h);
+    _ventes = h._ventes;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -39,7 +39,7 @@ historique_ventes::~historique_ventes (void)
 // Sélecteurs.
 ////////////////////////////////////////////////////////////////////////////////
 
-bool historique_ventes::existe (unsigned int id)
+bool historique_ventes::existe (unsigned int id) const
 {
     return _ventes.count (id) == 1;
 }

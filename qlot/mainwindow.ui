@@ -28,7 +28,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -61,7 +61,7 @@
        <widget class="QComboBox" name="critere_combo_box_gestion">
         <item>
          <property name="text">
-          <string/>
+          <string>Tout le stock</string>
          </property>
         </item>
         <item>
@@ -81,31 +81,45 @@
         </item>
         <item>
          <property name="text">
-          <string>Quantité</string>
+          <string>Prix d'achat (€)</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>Date de livraison</string>
+          <string>Prix de vente (€)</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>Prix d'achat</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Prix de vente</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Rabais</string>
+          <string>Prix effectif (€)</string>
          </property>
         </item>
        </widget>
-       <widget class="QLineEdit" name="ligne_recherche_gestion"/>
+       <widget class="QDoubleSpinBox" name="doubleSpinBox_gestion">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
+       <widget class="QDoubleSpinBox" name="doubleSpinBox_prix_max">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="suffix">
+         <string> euros</string>
+        </property>
+        <property name="minimum">
+         <double>1.000000000000000</double>
+        </property>
+        <property name="maximum">
+         <double>499.990000000000009</double>
+        </property>
+        <property name="singleStep">
+         <double>0.010000000000000</double>
+        </property>
+        <property name="value">
+         <double>1.000000000000000</double>
+        </property>
+       </widget>
       </widget>
       <widget class="QTableWidget" name="tableau_recherche_gestion">
        <property name="lineWidth">
@@ -136,7 +150,7 @@
         <number>8</number>
        </property>
        <attribute name="horizontalHeaderVisible">
-        <bool>true</bool>
+        <bool>false</bool>
        </attribute>
        <attribute name="horizontalHeaderCascadingSectionResizes">
         <bool>false</bool>
@@ -240,7 +254,7 @@
        </column>
        <column>
         <property name="text">
-         <string>Rabais</string>
+         <string>Prix effectif</string>
         </property>
         <property name="font">
          <font>
@@ -285,7 +299,7 @@
        <widget class="QComboBox" name="critere_combo_box_vente">
         <item>
          <property name="text">
-          <string/>
+          <string>Toutes les ventes</string>
          </property>
         </item>
         <item>
@@ -295,12 +309,7 @@
         </item>
         <item>
          <property name="text">
-          <string>Date</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Articles vendus</string>
+          <string>Quantité d'articles</string>
          </property>
         </item>
         <item>
@@ -309,7 +318,31 @@
          </property>
         </item>
        </widget>
-       <widget class="QLineEdit" name="ligne_recherche_vente"/>
+       <widget class="QDoubleSpinBox" name="doubleSpinBox_vente">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
+       <widget class="QDoubleSpinBox" name="doubleSpinBox_prix_max_vente">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="suffix">
+         <string> euros</string>
+        </property>
+        <property name="minimum">
+         <double>1.000000000000000</double>
+        </property>
+        <property name="maximum">
+         <double>99999.990000000005239</double>
+        </property>
+        <property name="singleStep">
+         <double>0.010000000000000</double>
+        </property>
+        <property name="value">
+         <double>1.000000000000000</double>
+        </property>
+       </widget>
       </widget>
       <widget class="QTableWidget" name="tableWidget_vente">
        <attribute name="horizontalHeaderDefaultSectionSize">
@@ -330,7 +363,7 @@
        </column>
        <column>
         <property name="text">
-         <string>Articles vendus</string>
+         <string>Quantité d'articles</string>
         </property>
        </column>
        <column>
@@ -360,6 +393,7 @@
     <addaction name="actionOuvrir_une_BDD"/>
     <addaction name="actionEnregistrer"/>
     <addaction name="separator"/>
+    <addaction name="separator"/>
     <addaction name="actionQuitter"/>
    </widget>
    <widget class="QMenu" name="menuAide">
@@ -374,10 +408,20 @@
      <string>Produits</string>
     </property>
     <addaction name="actionAjouter_une_marchandise"/>
+    <addaction name="separator"/>
     <addaction name="actionAjouter_une_vente"/>
+    <addaction name="actionAnnuler_la_vente"/>
+   </widget>
+   <widget class="QMenu" name="menuStatistiques">
+    <property name="title">
+     <string>Statistiques</string>
+    </property>
+    <addaction name="actionEconomies"/>
+    <addaction name="actionStock_total"/>
    </widget>
    <addaction name="menuFichier"/>
    <addaction name="menuProduits"/>
+   <addaction name="menuStatistiques"/>
    <addaction name="menuAide"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
@@ -445,6 +489,27 @@
   <action name="actionAjouter_une_vente">
    <property name="text">
     <string>Ajouter une vente</string>
+   </property>
+  </action>
+  <action name="actionEconomies">
+   <property name="text">
+    <string>Economies</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+E</string>
+   </property>
+  </action>
+  <action name="actionAnnuler_la_vente">
+   <property name="text">
+    <string>Annuler la vente</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Z</string>
+   </property>
+  </action>
+  <action name="actionStock_total">
+   <property name="text">
+    <string>Stock total</string>
    </property>
   </action>
  </widget>

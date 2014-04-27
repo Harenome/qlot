@@ -24,7 +24,9 @@ article_stock::article_stock (void)
 
 article_stock::article_stock (const article_stock & a)
 {
-    operator= (a);
+    _reference = a.reference ();
+    _quantite_stock = a.quantite_stock ();
+    _rabais = a.rabais ();
 }
 
 article_stock::article_stock (const reference_article & reference, unsigned int quantite, const pourcentage & rabais)
@@ -99,7 +101,7 @@ void article_stock::modifier_quantite_stock (unsigned int quantite)
 void article_stock::swap (article_stock & a)
 {
     std::swap (_quantite_stock, a._quantite_stock);
-    _rabais.swap (a._rabais);
+    _reference.swap (a._reference);
     _rabais.swap (a._rabais);
 }
 

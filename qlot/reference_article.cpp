@@ -38,7 +38,7 @@ void reference_article::_initialiser (unsigned int reference)
 
 reference_article::reference_article (const reference_article & reference)
 {
-    operator= (reference);
+    _initialiser (reference.vers_entier ());
 }
 
 reference_article::reference_article (unsigned int reference)

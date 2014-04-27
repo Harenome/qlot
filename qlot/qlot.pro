@@ -27,7 +27,10 @@ SOURCES += main.cpp\
     article_stock.cpp \
     articles_existants.cpp \
     article_affichage.cpp \
-    article.cpp
+    article.cpp \
+    article_vendu_affichage.cpp \
+    statdialog.cpp \
+    stockdialog.cpp
 
 HEADERS  += mainwindow.h \
     versiondialog.h \
@@ -47,9 +50,14 @@ HEADERS  += mainwindow.h \
     article_stock.hpp \
     articles_existants.hpp \
     article_affichage.hpp \
-    article.hpp
+    article.hpp \
+    article_vendu_affichage.hpp \
+    statdialog.h \
+    stockdialog.h
 
 FORMS    += mainwindow.ui \
     versiondialog.ui \
     ajoutmarchandisedialog.ui \
-    ajoutventedialog.ui
+    ajoutventedialog.ui \
+    statdialog.ui \
+    stockdialog.ui

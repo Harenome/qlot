@@ -18,8 +18,8 @@
 // Variables.
 ////////////////////////////////////////////////////////////////////////////////
 
-const pourcentage ZERO (0);
-const pourcentage CENT (100);
+const pourcentage pourcentage::ZERO (0);
+const pourcentage pourcentage::CENT (100);
 
 ////////////////////////////////////////////////////////////////////////////////
 // Constructeurs.
@@ -32,7 +32,7 @@ pourcentage::pourcentage (unsigned int valeur)
 
 pourcentage::pourcentage (const pourcentage & p)
 {
-    operator= (p);
+    modifier_valeur (p.valeur ());
 }
 
 ////////////////////////////////////////////////////////////////////////////////

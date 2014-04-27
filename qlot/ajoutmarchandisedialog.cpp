@@ -40,18 +40,11 @@ void AjoutMarchandiseDialog::validation()
 
     unsigned int rabais = pcg.valeur();
 
-    fprintf(stderr,"Pas de bug à l'assignement du poucentage\nRa = (%u,%u,%u), Achat = %f, Vente %f, Date = %d/%d/%d\n",ra.modele(),ra.couleur(),ra.taille(),achat,vente,d.jour(),d.mois(),d.annee());
-
     // Ajout de l'article dans les articles existants
     article art(ra,achat,vente,d);
 
-    fprintf(stderr,"Pas de bug à la création de l'article\n");
-
     // Finalisation
     parent->m.ajouter_article(art,quantite,rabais);
-
-    // Ajoute une ligne au tableau de recherche
-    parent->ui->tableau_recherche_gestion->setRowCount(parent->ui->tableau_recherche_gestion->rowCount() + 1);
 
     emit(accept());
 }

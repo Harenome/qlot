@@ -42,7 +42,7 @@ article_vendu::article_vendu (const reference_article & reference, unsigned int 
 
 article_vendu::article_vendu (const article_vendu & a)
 {
-    operator= (a);
+    _initialiser (a.reference (), a.quantite_vendue (), a.prix ());
 }
 
 ////////////////////////////////////////////////////////////////////////////////

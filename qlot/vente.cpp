@@ -43,7 +43,9 @@ vente::vente (unsigned int id, const date & date_vente)
 
 vente::vente (const vente & v)
 {
-    operator= (v);
+    _id = v._id;
+    _date_vente = v._date_vente;
+    _articles_vendus = v._articles_vendus;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -74,6 +76,18 @@ double vente::total (void) const
 date vente::date_vente (void) const
 {
     return _date_vente;
+}
+
+std::vector<article_vendu_affichage> vente::articles_vendus (void) const
+{
+    std::vector<article_vendu_affichage> vendus;
+    for (vente_const_iterator it = _articles_vendus.begin (); it != _articles_vendus.end (); ++it)
+    {
+        article_vendu_affichage a (id (), it->second);
+        vendus.push_back (a);
+    }
+
+    return vendus;
 }
 
 unsigned int vente::quantite_articles_vendus (void) const
@@ -189,6 +203,16 @@ void vente::remplacer_reference (const reference_article & ancienne_reference, c
 ////////////////////////////////////////////////////////////////////////////////
 // Divers.
 ////////////////////////////////////////////////////////////////////////////////
+
+vente_const_iterator vente::begin (void) const
+{
+    return _articles_vendus.begin ();
+}
+
+vente_const_iterator vente::end (void) const
+{
+    return _articles_vendus.end ();
+}
 
 vente & vente::operator= (vente v)
 {

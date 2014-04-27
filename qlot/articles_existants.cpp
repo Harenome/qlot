@@ -24,7 +24,7 @@ articles_existants::articles_existants (void)
 
 articles_existants::articles_existants (const articles_existants & a)
 {
-    operator= (a);
+    _articles = a._articles;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -39,12 +39,12 @@ articles_existants::~articles_existants (void)
 // Sélecteurs.
 ////////////////////////////////////////////////////////////////////////////////
 
-bool articles_existants::existe (const reference_article & reference)
+bool articles_existants::existe (const reference_article & reference) const
 {
     return existe (reference.vers_entier ());
 }
 
-bool articles_existants::existe (unsigned int reference)
+bool articles_existants::existe (unsigned int reference) const
 {
     return _articles.count (reference) == 1;
 }
