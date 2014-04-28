@@ -90,7 +90,13 @@ articles_existants_const_iterator articles_existants::end (void) const
 
 void articles_existants::ajouter_article (const article & a)
 {
-    _articles.insert (articles_existants_element (a.reference ().vers_entier (), a));
+    if (existe (a.reference ()))
+    {
+        article & ar = operator[] (a.reference ());
+        ar.modifier_date_livraison (a.date_livraison ());
+    }
+    else
+        _articles.insert (articles_existants_element (a.reference ().vers_entier (), a));
 }
 
 void articles_existants::retirer_article (const article & a)
