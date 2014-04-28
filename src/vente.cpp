@@ -25,27 +25,25 @@ unsigned int vente::_id_suivant = 0;
 ////////////////////////////////////////////////////////////////////////////////
 
 vente::vente (void)
+: _id (_id_suivant)
 {
+    _id_suivant++;
 }
 
 vente::vente (const date & date_vente)
+: _id (_id_suivant), _date_vente (date_vente)
 {
-    _id = _id_suivant;
-    _date_vente = date_vente;
     _id_suivant++;
 }
 
 vente::vente (unsigned int id, const date & date_vente)
+: _id (id), _date_vente (date_vente)
 {
-    _id = id;
-    _date_vente = date_vente;
 }
 
 vente::vente (const vente & v)
+: _id (v._id), _date_vente (v._date_vente), _articles_vendus (v._articles_vendus)
 {
-    _id = v._id;
-    _date_vente = v._date_vente;
-    _articles_vendus = v._articles_vendus;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
