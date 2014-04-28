@@ -1,3 +1,4 @@
+#include <iostream>
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
@@ -92,15 +93,18 @@ void MainWindow::nouvellebdd()
 void MainWindow::enregistrer()
 {
     QString filename;
-    filename = QFileDialog::getSaveFileName(this,tr("Enregistrer un fichier de gestion QloT"),QString(),tr("FichierQloT (*.qlot *.culotte)"));
+    filename = QFileDialog::getSaveFileName(this,tr("Enregistrer un fichier de gestion QloT"),QString(),tr("FichierQloT *.qlot(*.qlot *.culotte)"));
     es::sauvegarder_magasin(filename.toStdString(),m);
 }
 
 void MainWindow::ouvrir()
 {
     QString filename;
-    filename = QFileDialog::getOpenFileName(this,tr("Ouvrir un fichier de gestion QloT"),QString(),tr("FichierQloT (*.qlot *.culotte)"));
+    filename = QFileDialog::getOpenFileName(this,tr("Ouvrir un fichier de gestion QloT"),QString(),tr("FichierQloT *.qlot(*.qlot *.culotte)"));
     es::charger_magasin(filename.toStdString(),m);
+    std::cout << filename.toStdString() << std::endl;
+    affichage_gestion();
+    affichage_vente();
 }
 
 void MainWindow::affichage_gestion()
@@ -595,6 +599,7 @@ void MainWindow::affichage_vente()
                 }
                 std::vector<vente> vv = m.ventes();
 
+                std::cout << vv[i] << std::endl;
                 sprintf(id[i],"%u",vv[i].id());
                 ui->tableWidget_vente->item(i,0)->setText(id[i]);
 

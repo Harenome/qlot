@@ -122,7 +122,7 @@ std::ostream & operator<< (std::ostream & os, const pourcentage & p)
 std::istream & operator>> (std::istream & is, pourcentage & p)
 {
     unsigned int valeur;
-    unsigned int caractere;
+    char caractere;
 
     is >> valeur >> caractere;
 

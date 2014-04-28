@@ -20,7 +20,7 @@ private:
     Ui::StockDialog *ui;
 
 private slots:
-    void StockDialog::refresh_nb();
+    void refresh_nb();
 };
 
 #endif // STOCKDIALOG_H

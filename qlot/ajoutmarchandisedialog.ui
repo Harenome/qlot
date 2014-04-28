@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>324</width>
-    <height>401</height>
+    <height>341</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -24,7 +24,7 @@
    <property name="geometry">
     <rect>
      <x>40</x>
-     <y>350</y>
+     <y>300</y>
      <width>241</width>
      <height>27</height>
     </rect>
@@ -46,384 +46,324 @@
     </property>
    </widget>
   </widget>
-  <widget class="QSplitter" name="splitter_4">
-   <property name="geometry">
-    <rect>
-     <x>60</x>
-     <y>100</y>
-     <width>241</width>
-     <height>27</height>
-    </rect>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Horizontal</enum>
-   </property>
-   <widget class="QLabel" name="label_3">
-    <property name="text">
-     <string>Taille</string>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-    </property>
-   </widget>
-   <widget class="QSpinBox" name="spinBox_taille">
-    <property name="suffix">
-     <string> (EU)</string>
-    </property>
-    <property name="prefix">
-     <string/>
-    </property>
-    <property name="minimum">
-     <number>15</number>
-    </property>
-    <property name="maximum">
-     <number>50</number>
-    </property>
-   </widget>
-  </widget>
-  <widget class="QSplitter" name="splitter_7">
-   <property name="geometry">
-    <rect>
-     <x>-20</x>
-     <y>220</y>
-     <width>321</width>
-     <height>27</height>
-    </rect>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Horizontal</enum>
-   </property>
-   <widget class="QLabel" name="label_6">
-    <property name="text">
-     <string>Prix d'achat</string>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-    </property>
-   </widget>
-   <widget class="QDoubleSpinBox" name="doubleSpinBox_achat">
-    <property name="suffix">
-     <string>€</string>
-    </property>
-    <property name="minimum">
-     <double>0.990000000000000</double>
-    </property>
-    <property name="maximum">
-     <double>499.990000000000009</double>
-    </property>
-    <property name="singleStep">
-     <double>0.010000000000000</double>
-    </property>
-   </widget>
-  </widget>
-  <widget class="QSplitter" name="splitter_5">
-   <property name="geometry">
-    <rect>
-     <x>-70</x>
-     <y>140</y>
-     <width>371</width>
-     <height>27</height>
-    </rect>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Horizontal</enum>
-   </property>
-   <widget class="QLabel" name="label_4">
-    <property name="text">
-     <string>Quantité</string>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-    </property>
-   </widget>
-   <widget class="QSpinBox" name="spinBox_quantite">
-    <property name="minimum">
-     <number>1</number>
-    </property>
-    <property name="maximum">
-     <number>99</number>
-    </property>
-    <property name="value">
-     <number>1</number>
-    </property>
-   </widget>
-  </widget>
-  <widget class="QSplitter" name="splitter_3">
-   <property name="geometry">
-    <rect>
-     <x>50</x>
-     <y>60</y>
-     <width>251</width>
-     <height>27</height>
-    </rect>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Horizontal</enum>
-   </property>
-   <widget class="QLabel" name="label_2">
-    <property name="text">
-     <string>Couleur</string>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-    </property>
-   </widget>
-   <widget class="QComboBox" name="comboBox_couleur">
-    <item>
-     <property name="text">
-      <string>Cyan</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Magenta</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Emeraude</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Jaune</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Bleu</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Rouge</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Vert</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Saphir</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Kaki</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Brun</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Marron</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Rose</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Violet</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Mauve</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Pourpre</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Bleu roi</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Ocre</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Noir</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Blanc</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Gris</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Beige</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Crème</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Fluo</string>
-     </property>
-    </item>
-   </widget>
-  </widget>
-  <widget class="QSplitter" name="splitter_8">
-   <property name="geometry">
-    <rect>
-     <x>-40</x>
-     <y>260</y>
-     <width>341</width>
-     <height>27</height>
-    </rect>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Horizontal</enum>
-   </property>
-   <widget class="QLabel" name="label_7">
-    <property name="text">
-     <string>Prix de vente</string>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-    </property>
-   </widget>
-   <widget class="QDoubleSpinBox" name="doubleSpinBox_vente">
-    <property name="suffix">
-     <string>€</string>
-    </property>
-    <property name="minimum">
-     <double>0.990000000000000</double>
-    </property>
-    <property name="maximum">
-     <double>499.990000000000009</double>
-    </property>
-    <property name="singleStep">
-     <double>0.010000000000000</double>
-    </property>
-   </widget>
-  </widget>
-  <widget class="QSplitter" name="splitter_6">
-   <property name="geometry">
-    <rect>
-     <x>-50</x>
-     <y>180</y>
-     <width>351</width>
-     <height>27</height>
-    </rect>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Horizontal</enum>
-   </property>
-   <widget class="QLabel" name="label_5">
-    <property name="text">
-     <string>Date de livraison</string>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-    </property>
-   </widget>
-   <widget class="QDateEdit" name="dateEdit_livraison">
-    <property name="date">
-     <date>
-      <year>2014</year>
-      <month>4</month>
-      <day>27</day>
-     </date>
-    </property>
-    <property name="minimumDate">
-     <date>
-      <year>2014</year>
-      <month>4</month>
-      <day>27</day>
-     </date>
-    </property>
-    <property name="calendarPopup">
-     <bool>true</bool>
-    </property>
-   </widget>
-  </widget>
-  <widget class="QSplitter" name="splitter_2">
+  <widget class="QWidget" name="formLayoutWidget">
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>20</y>
-     <width>291</width>
-     <height>27</height>
+     <y>10</y>
+     <width>301</width>
+     <height>271</height>
     </rect>
    </property>
-   <property name="orientation">
-    <enum>Qt::Horizontal</enum>
-   </property>
-   <widget class="QLabel" name="label">
-    <property name="text">
-     <string>Modèle</string>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-    </property>
-   </widget>
-   <widget class="QSpinBox" name="spinBox_modele">
-    <property name="prefix">
-     <string>n° </string>
-    </property>
-    <property name="minimum">
-     <number>1</number>
-    </property>
-    <property name="maximum">
-     <number>9999</number>
-    </property>
-   </widget>
-  </widget>
-  <widget class="QSplitter" name="splitter_9">
-   <property name="geometry">
-    <rect>
-     <x>-20</x>
-     <y>300</y>
-     <width>321</width>
-     <height>27</height>
-    </rect>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Horizontal</enum>
-   </property>
-   <widget class="QLabel" name="label_8">
-    <property name="text">
-     <string>Rabais</string>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-    </property>
-   </widget>
-   <widget class="QSpinBox" name="spinBox_rabais">
-    <property name="suffix">
-     <string>%</string>
-    </property>
-    <property name="prefix">
-     <string>-</string>
-    </property>
-    <property name="maximum">
-     <number>100</number>
-    </property>
-   </widget>
+   <layout class="QFormLayout" name="formLayout">
+    <item row="0" column="1">
+     <widget class="QSpinBox" name="spinBox_modele">
+      <property name="prefix">
+       <string>n° </string>
+      </property>
+      <property name="minimum">
+       <number>1</number>
+      </property>
+      <property name="maximum">
+       <number>9999</number>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="0">
+     <widget class="QLabel" name="label">
+      <property name="text">
+       <string>Modèle</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="QLabel" name="label_2">
+      <property name="text">
+       <string>Couleur</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QComboBox" name="comboBox_couleur">
+      <item>
+       <property name="text">
+        <string>Cyan</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Magenta</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Emeraude</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Jaune</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Bleu</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Rouge</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Vert</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Saphir</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Kaki</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Brun</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Marron</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Rose</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Violet</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Mauve</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Pourpre</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Bleu roi</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Ocre</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Noir</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Blanc</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Gris</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Beige</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Crème</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Fluo</string>
+       </property>
+      </item>
+     </widget>
+    </item>
+    <item row="2" column="0">
+     <widget class="QLabel" name="label_3">
+      <property name="text">
+       <string>Taille</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="1">
+     <widget class="QSpinBox" name="spinBox_taille">
+      <property name="suffix">
+       <string> (EU)</string>
+      </property>
+      <property name="prefix">
+       <string/>
+      </property>
+      <property name="minimum">
+       <number>15</number>
+      </property>
+      <property name="maximum">
+       <number>50</number>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="0">
+     <widget class="QLabel" name="label_4">
+      <property name="text">
+       <string>Quantité</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="1">
+     <widget class="QSpinBox" name="spinBox_quantite">
+      <property name="minimum">
+       <number>1</number>
+      </property>
+      <property name="maximum">
+       <number>99</number>
+      </property>
+      <property name="value">
+       <number>1</number>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="0">
+     <widget class="QLabel" name="label_5">
+      <property name="text">
+       <string>Date de livraison</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="1">
+     <widget class="QDateEdit" name="dateEdit_livraison">
+      <property name="date">
+       <date>
+        <year>2014</year>
+        <month>4</month>
+        <day>27</day>
+       </date>
+      </property>
+      <property name="minimumDate">
+       <date>
+        <year>2014</year>
+        <month>4</month>
+        <day>27</day>
+       </date>
+      </property>
+      <property name="calendarPopup">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="0">
+     <widget class="QLabel" name="label_6">
+      <property name="text">
+       <string>Prix d'achat</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="1">
+     <widget class="QDoubleSpinBox" name="doubleSpinBox_achat">
+      <property name="suffix">
+       <string>€</string>
+      </property>
+      <property name="minimum">
+       <double>0.990000000000000</double>
+      </property>
+      <property name="maximum">
+       <double>499.990000000000009</double>
+      </property>
+      <property name="singleStep">
+       <double>0.010000000000000</double>
+      </property>
+     </widget>
+    </item>
+    <item row="6" column="0">
+     <widget class="QLabel" name="label_7">
+      <property name="text">
+       <string>Prix de vente</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item row="6" column="1">
+     <widget class="QDoubleSpinBox" name="doubleSpinBox_vente">
+      <property name="suffix">
+       <string>€</string>
+      </property>
+      <property name="minimum">
+       <double>0.990000000000000</double>
+      </property>
+      <property name="maximum">
+       <double>499.990000000000009</double>
+      </property>
+      <property name="singleStep">
+       <double>0.010000000000000</double>
+      </property>
+     </widget>
+    </item>
+    <item row="7" column="0">
+     <widget class="QLabel" name="label_8">
+      <property name="text">
+       <string>Rabais</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item row="7" column="1">
+     <widget class="QSpinBox" name="spinBox_rabais">
+      <property name="suffix">
+       <string>%</string>
+      </property>
+      <property name="prefix">
+       <string>-</string>
+      </property>
+      <property name="maximum">
+       <number>100</number>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
  </widget>
  <resources/>

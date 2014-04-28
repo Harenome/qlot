@@ -96,7 +96,15 @@ stock_const_iterator stock::end (void) const
 
 void stock::ajouter_article (const article_stock & a)
 {
-    _stock.insert (stock_element (a.reference ().vers_entier (), a));
+    reference_article r = a.reference ();
+    if (article_en_stock (r))
+    {
+        article_stock & ar = operator[] (r);
+        unsigned nouveau_stock = ar.quantite_stock () + a.quantite_stock ();;
+        ar.modifier_quantite_stock (nouveau_stock);
+    }
+    else
+        _stock.insert (stock_element (a.reference ().vers_entier (), a));
 }
 
 void stock::ajouter_article (const reference_article & reference, unsigned int quantite, const pourcentage & rabais)
