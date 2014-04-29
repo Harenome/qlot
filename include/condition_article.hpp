@@ -30,6 +30,8 @@ struct condition_article : public std::unary_function<const article &, bool>
      */
     virtual bool operator() (const article & a) const
     {
+        /* La non utilisation de a est intentionnelle ! */
+        (void) a;
         return true;
     }
 };

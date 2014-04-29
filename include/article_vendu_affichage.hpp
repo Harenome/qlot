@@ -58,6 +58,30 @@ public:
     unsigned int id_vente (void) const;
 
     /**
+     * \brief Obtenir la référence de l'article qui a été vendu.
+     * \return Référence de l'article qui a été vendu.
+     */
+    reference_article reference (void) const;
+
+    /**
+     * \brief Obtenir la quantité vendue.
+     * \return Quantité vendue.
+     */
+    unsigned int quantite_vendue (void) const;
+
+    /**
+     * \brief Obtenir le prix de vente.
+     * \return Prix de vente.
+     */
+    double prix (void) const;
+
+    /**
+     * \brief Obtenir le total payé pour cet article.
+     * \return Total.
+     */
+    double total (void) const;
+
+    /**
      * \brief Échanger.
      * \param a Article vendu affichage.
      */
@@ -71,6 +95,7 @@ public:
 
 private:
     unsigned int _id_vente;     /**<- ID vente. */
+    article_vendu _article_vendu;     /**<- ID vente. */
 };
 
 /**
