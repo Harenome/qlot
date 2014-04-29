@@ -31,6 +31,8 @@ struct condition_vente : public std::unary_function<const vente &, bool>
      */
     virtual bool operator() (const vente & v) const
     {
+        /* La non utilisation de v est intentionnelle ! */
+        (void) v;
         return true;
     }
 };
