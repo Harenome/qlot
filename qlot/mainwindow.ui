@@ -124,6 +124,16 @@
               </property>
              </spacer>
             </item>
+            <item>
+             <widget class="QPushButton" name="modif_article">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="text">
+               <string>Modifier un article</string>
+              </property>
+             </widget>
+            </item>
            </layout>
           </item>
           <item>
@@ -387,6 +397,16 @@
               </property>
              </spacer>
             </item>
+            <item>
+             <widget class="QPushButton" name="boutton_detail_vente">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="text">
+               <string>Détail de la vente</string>
+              </property>
+             </widget>
+            </item>
            </layout>
           </item>
           <item>
@@ -467,7 +487,7 @@
      <x>0</x>
      <y>0</y>
      <width>816</width>
-     <height>17</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFichier">

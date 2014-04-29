@@ -29,9 +29,13 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(ui->critere_combo_box_gestion,SIGNAL(currentIndexChanged(int)),this,SLOT(changement_affichage_gestion()),Qt::AutoConnection);
     QObject::connect(ui->doubleSpinBox_gestion,SIGNAL(valueChanged(double)),this,SLOT(changement_affichage_gestion()),Qt::AutoConnection);
     QObject::connect(ui->doubleSpinBox_prix_max,SIGNAL(valueChanged(double)),this,SLOT(changement_affichage_gestion()),Qt::AutoConnection);
+    QObject::connect(ui->tableau_recherche_gestion,SIGNAL(itemSelectionChanged()),this,SLOT(enablement_modif()),Qt::AutoConnection);
+    QObject::connect(ui->modif_article,SIGNAL(clicked()),this,SLOT(modif_article(unsigned int)),Qt::AutoConnection);
 
     // Vente
     QObject::connect(ui->critere_combo_box_vente,SIGNAL(currentIndexChanged(int)),this,SLOT(changement_affichage_vente()),Qt::AutoConnection);
+    QObject::connect(ui->tableWidget_vente,SIGNAL(itemSelectionChanged()),this,SLOT(enablement_detail_vente()),Qt::AutoConnection);
+    QObject::connect(ui->boutton_detail_vente,SIGNAL(clicked()),this,SLOT(ouvre_detail(unsigned int id_vente)),Qt::AutoConnection);
 }
 
 MainWindow::~MainWindow()
@@ -641,4 +645,31 @@ void MainWindow::affichage_vente()
     }
     else
         ui->tableWidget_vente->setRowCount(0);
+}
+
+void MainWindow::enablement_detail_vente()
+{
+    if (ui->tableWidget_vente->rowCount()>0)
+        ui->boutton_detail_vente->setEnabled(true);
+    else ui->boutton_detail_vente->setEnabled(false);
+}
+
+void MainWindow::enablement_modif()
+{
+    if (ui->tableau_recherche_gestion->rowCount()>0)
+        ui->modif_article->setEnabled(true);
+    else ui->modif_article->setEnabled(false);
+}
+
+void MainWindow::ouvre_detail()
+{
+
+}
+
+void MainWindow::modif_article(unsigned int ref)
+{
+    ModifArticleDialog mad(this,ui->tableau_recherche_gestion->item(ui->tableau_recherche_gestion->currentRow(),0)->text().toInt());
+    mad.exec();
+
+    affichage_gestion();
 }
