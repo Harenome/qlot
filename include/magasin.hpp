@@ -286,6 +286,21 @@ public:
     std::vector<vente> ventes_par_couleur (unsigned int couleur) const;
 
     /**
+     * \brief Obtenir les ventes contenant un article qui correspond.
+     * \param quantite Quantité d'articles vendus.
+     * \return Ventes qui correspondent.
+     */
+    std::vector<vente> ventes_par_quantite (unsigned int quantite) const;
+
+    /**
+     * \brief Obtenir les ventes dont le prix total correspond.
+     * \param minimum Minimum.
+     * \param maximum Maximum.
+     * \return Ventes qui correspondent.
+     */
+    std::vector<vente> ventes_par_prix_total (double minimum, double maximum) const;
+
+    /**
      * \brief Ajouter un article.
      * \param a Article.
      * \param quantite Quantité.

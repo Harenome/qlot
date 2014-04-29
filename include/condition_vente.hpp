@@ -154,4 +154,52 @@ struct condition_vente_couleur : virtual condition_vente
     }
 };
 
+/**
+ * \brief Tester si le nombre d'articles vendus correspond.
+ */
+struct condition_vente_quantite : virtual condition_vente
+{
+    unsigned int _quantite; /**<- Couleur recherchée. */
+
+    /**
+     * \brief Constructeur.
+     * \param couleur Couleur recherchée.
+     */
+    condition_vente_quantite (unsigned int quantite)
+    {
+        _quantite = quantite;
+    }
+
+    bool operator() (const vente & v) const
+    {
+        return v.quantite_articles_vendus () == _quantite;
+    }
+};
+
+/**
+ * \brief Tester si la vente est comprise dans une fourchette.
+ */
+struct condition_vente_prix_total : virtual condition_vente
+{
+    double _minimum;    /**<- Borne inférieure. */
+    double _maximum;    /**<- Borne supérieure. */
+
+    /**
+     * \brief Constructeur.
+     * \param minimum Minimum.
+     * \param maximum Maximum.
+     */
+    condition_vente_prix_total (double minimum, double maximum)
+    {
+        _minimum = _minimum;
+        _maximum = _maximum;
+    }
+
+    bool operator() (const vente & v) const
+    {
+        double prix_total = v.total ();
+        return _minimum <= prix_total && prix_total <= _maximum;
+    }
+};
+
 #endif /* __CONDITION_VENTE_HPP__ */
