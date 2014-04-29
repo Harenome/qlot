@@ -576,8 +576,23 @@ public:
      */
     std::ostream & ecrire_vers (std::ostream & os) const;
 
+    /**
+     * \brief Vérifier si un magasin a été modifié depuis la dernière sauvegarde.
+     * \retval true Si le magasin a été modifié.
+     * \retval false Sinon.
+     */
+    bool modifie_depuis_sauvegarde (void) const;
+
+    /**
+     * \brief Notifier le magasin qu'il a été sauvegardé.
+     */
+    void sauvegarde_faite (void);
+
+    void modifier_etat_sauvegarde (bool etat);
+
 private:
     stock _stock;                       /**<- Stock. */
+    bool _modification_sauvegarde;      /**<- État de sauvegarde. */
     articles_existants _articles;       /**<- Articles. */
     historique_ventes _historique;      /**<- Historique. */
 
@@ -588,7 +603,13 @@ private:
      */
     std::vector<article_affichage> _articles_par_condition (const condition_article & condition) const;
 
+    /**
+     * \brief Obtenir un vector contenant tous les articles respectant une condition.
+     * \param condition Condition.
+     * \return std::vector.
+     */
     std::vector<vente> _ventes_par_condition (const condition_vente & condition) const;
+
     /**
      * \brief Modifier le modèle d'un article.
      * \param a Article
