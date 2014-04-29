@@ -309,6 +309,18 @@ std::vector<vente> magasin::ventes_par_couleur (unsigned int couleur) const
     return _ventes_par_condition (condition);
 }
 
+std::vector<vente> magasin::ventes_par_quantite (unsigned int quantite) const
+{
+    condition_vente_quantite condition (quantite);
+    return _ventes_par_condition (condition);
+}
+
+std::vector<vente> magasin::ventes_par_prix_total (double minimum, double maximum) const
+{
+    condition_vente_prix_total condition (minimum, maximum);
+    return _ventes_par_condition (condition);
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 // Modificateurs.
 ////////////////////////////////////////////////////////////////////////////////
