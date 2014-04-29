@@ -1,13 +1,15 @@
 #include "modifarticledialog.h"
 #include "ui_modifarticledialog.h"
 
-ModifArticleDialog::ModifArticleDialog(QWidget *parent,unsigned int ref) :
+ModifArticleDialog::ModifArticleDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::ModifArticleDialog)
 {
     ui->setupUi(this);
 
-    init_modif(ref);
+    MainWindow * pere = (MainWindow *)parentWidget();
+
+    init_modif(pere->id_vente);
 
     QObject::connect(ui->ajout_marchandise_button,SIGNAL(clicked()),this,SLOT(modifie_article()),Qt::AutoConnection);
 }

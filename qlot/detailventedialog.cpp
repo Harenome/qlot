@@ -1,12 +1,15 @@
 #include "detailventedialog.h"
 #include "ui_detailventedialog.h"
 
-DetailVenteDialog::DetailVenteDialog(QWidget *parent, const vente &v_courante) :
+DetailVenteDialog::DetailVenteDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::DetailVenteDialog)
 {
     ui->setupUi(this);
-    vente v(v_courante);
+
+    MainWindow * pere = (MainWindow *)parentWidget();
+
+    vente v(pere->m.vente_id(pere->id_vente));
     charge_detail(v);
 }
 
@@ -33,8 +36,10 @@ void DetailVenteDialog::charge_detail(const vente & v)
             ui->tableWidget->setItem(i,j,tab[i][j]);
         }
 
+        sprintf(ref[i],"%u%u%u",af[i].reference().modele(),af[i].reference().couleur(),af[i].reference().taille());
         ui->tableWidget->item(i,0)->setText(ref[i]);
 
-        ui->tableWidget->item(i,1)->setText(qte);
+        sprintf(qte[i],"%u",af[i].quantite_vendue());
+        ui->tableWidget->item(i,1)->setText(qte[i]);
     }
 }

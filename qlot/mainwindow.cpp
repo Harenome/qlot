@@ -8,6 +8,14 @@ char * int_to_couleur(int coul)
     return list[coul];
 }
 
+int couleur_to_int (char * c)
+{
+    char * list [23] = {"Cyan","Magenta","Emeraude","Jaune","Bleu","Rouge","Vert","Saphir","Kaki","Brun","Marron","Rose","Violet","Mauve","Pourpre","Bleu roi","Ocre","Noir","Blanc","Gris","Beige","Creme","Fluo"};
+    for (int i = 0 ; i<22 ; i++)
+        if (c == list[i])
+            return i;
+}
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -30,12 +38,12 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(ui->doubleSpinBox_gestion,SIGNAL(valueChanged(double)),this,SLOT(changement_affichage_gestion()),Qt::AutoConnection);
     QObject::connect(ui->doubleSpinBox_prix_max,SIGNAL(valueChanged(double)),this,SLOT(changement_affichage_gestion()),Qt::AutoConnection);
     QObject::connect(ui->tableau_recherche_gestion,SIGNAL(itemSelectionChanged()),this,SLOT(enablement_modif()),Qt::AutoConnection);
-    QObject::connect(ui->modif_article,SIGNAL(clicked()),this,SLOT(modif_article(unsigned int)),Qt::AutoConnection);
+    QObject::connect(ui->modif_article,SIGNAL(clicked()),this,SLOT(modif_article()),Qt::AutoConnection);
 
     // Vente
     QObject::connect(ui->critere_combo_box_vente,SIGNAL(currentIndexChanged(int)),this,SLOT(changement_affichage_vente()),Qt::AutoConnection);
     QObject::connect(ui->tableWidget_vente,SIGNAL(itemSelectionChanged()),this,SLOT(enablement_detail_vente()),Qt::AutoConnection);
-    QObject::connect(ui->boutton_detail_vente,SIGNAL(clicked()),this,SLOT(ouvre_detail(unsigned int id_vente)),Qt::AutoConnection);
+    QObject::connect(ui->boutton_detail_vente,SIGNAL(clicked()),this,SLOT(ouvre_detail()),Qt::AutoConnection);
 }
 
 MainWindow::~MainWindow()
@@ -663,12 +671,15 @@ void MainWindow::enablement_modif()
 
 void MainWindow::ouvre_detail()
 {
-
+    id_vente = ui->tableWidget_vente->item(ui->tableWidget_vente->currentRow(),0)->text().toInt() * 10 000 + couleur_to_int(ui->tableWidget_vente->item(ui->tableWidget_vente->currentRow(),1)->text().toInt()) * 100 + ui->tableWidget_vente->item(ui->tableWidget_vente->currentRow(),2)->text().toInt();
+    DetailVenteDialog dvd(this);
+    dvd.exec();
 }
 
-void MainWindow::modif_article(unsigned int ref)
+void MainWindow::modif_article()
 {
-    ModifArticleDialog mad(this,ui->tableau_recherche_gestion->item(ui->tableau_recherche_gestion->currentRow(),0)->text().toInt());
+    id_vente = ui->tableau_recherche_gestion->item(ui->tableau_recherche_gestion->currentRow(),0)->text().toInt();
+    ModifArticleDialog mad(this);
     mad.exec();
 
     affichage_gestion();

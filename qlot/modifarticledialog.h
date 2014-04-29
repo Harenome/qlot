@@ -13,7 +13,7 @@ class ModifArticleDialog : public QDialog
     Q_OBJECT
     
 public:
-    explicit ModifArticleDialog(QWidget *parent = 0, unsigned int ref);
+    explicit ModifArticleDialog(QWidget *parent = 0);
     ~ModifArticleDialog();
     
 private:

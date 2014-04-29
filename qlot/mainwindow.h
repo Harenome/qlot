@@ -25,6 +25,7 @@ public:
     ~MainWindow();
 
     magasin m;
+    unsigned int id_vente;
 
 private:
     Ui::MainWindow *ui;
@@ -46,7 +47,7 @@ private slots:
     void enablement_detail_vente();
     void enablement_modif();
     void ouvre_detail();
-    void modif_article(unsigned int ref);
+    void modif_article();
 };
 
 #endif // MAINWINDOW_H
