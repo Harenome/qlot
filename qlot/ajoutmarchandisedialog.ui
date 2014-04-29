@@ -28,6 +28,9 @@
      </property>
      <item>
       <layout class="QFormLayout" name="formLayout">
+       <property name="labelAlignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
        <property name="horizontalSpacing">
         <number>20</number>
        </property>
@@ -369,19 +372,19 @@
         </spacer>
        </item>
        <item>
-        <widget class="QPushButton" name="refus_marchandise_button">
-         <property name="text">
-          <string>Annuler</string>
-         </property>
-        </widget>
-       </item>
-       <item>
         <widget class="QPushButton" name="ajout_marchandise_button">
          <property name="enabled">
           <bool>true</bool>
          </property>
          <property name="text">
           <string>Ajouter</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="refus_marchandise_button">
+         <property name="text">
+          <string>Annuler</string>
          </property>
         </widget>
        </item>

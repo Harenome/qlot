@@ -193,19 +193,19 @@
         </spacer>
        </item>
        <item>
-        <widget class="QPushButton" name="button_annuler_vente">
-         <property name="text">
-          <string>Annuler</string>
-         </property>
-        </widget>
-       </item>
-       <item>
         <widget class="QPushButton" name="button_vente">
          <property name="enabled">
           <bool>false</bool>
          </property>
          <property name="text">
           <string>Vendre</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="button_annuler_vente">
+         <property name="text">
+          <string>Annuler</string>
          </property>
         </widget>
        </item>

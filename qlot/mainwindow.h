@@ -8,6 +8,8 @@
 #include "ajoutventedialog.h"
 #include "statdialog.h"
 #include "stockdialog.h"
+#include "detailventedialog.h"
+#include "modifarticledialog.h"
 #include "es.hpp"
 
 namespace Ui {
@@ -23,6 +25,7 @@ public:
     ~MainWindow();
 
     magasin m;
+    unsigned int id_vente;
 
 private:
     Ui::MainWindow *ui;
@@ -41,6 +44,10 @@ private slots:
     void changement_affichage_vente();
     void changement_affichage_gestion();
     void stock_total();
+    void enablement_detail_vente();
+    void enablement_modif();
+    void ouvre_detail();
+    void modif_article();
 };
 
 #endif // MAINWINDOW_H
