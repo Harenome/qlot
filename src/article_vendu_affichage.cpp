@@ -14,18 +14,18 @@
 #include "article_vendu_affichage.hpp"
 
 article_vendu_affichage::article_vendu_affichage (void)
-: article_vendu ()
+: _article_vendu ()
 {
 }
 
 article_vendu_affichage::article_vendu_affichage (unsigned int id_vente, const reference_article & reference, unsigned int quantite, double prix)
-: article_vendu (reference, quantite, prix)
+: _article_vendu (reference, quantite, prix)
 {
     _id_vente = id_vente;
 }
 
 article_vendu_affichage::article_vendu_affichage (unsigned int id_vente, const article_vendu & a)
-: article_vendu (a)
+: _article_vendu (a)
 {
     _id_vente = id_vente;
 }
@@ -39,9 +39,29 @@ unsigned int article_vendu_affichage::id_vente (void) const
     return _id_vente;
 }
 
+reference_article article_vendu_affichage::reference (void) const
+{
+    return _article_vendu.reference ();
+}
+
+unsigned int article_vendu_affichage::quantite_vendue (void) const
+{
+    return _article_vendu.quantite_vendue ();
+}
+
+double article_vendu_affichage::prix (void) const
+{
+    return _article_vendu.prix ();
+}
+
+double article_vendu_affichage::total (void) const
+{
+    return _article_vendu.total ();
+}
+
 void article_vendu_affichage::swap (article_vendu_affichage & a)
 {
-    article_vendu::swap (a);
+    _article_vendu.swap (a);
     std::swap (_id_vente, a._id_vente);
 }
 
