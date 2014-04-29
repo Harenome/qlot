@@ -191,8 +191,8 @@ struct condition_vente_prix_total : virtual condition_vente
      */
     condition_vente_prix_total (double minimum, double maximum)
     {
-        _minimum = _minimum;
-        _maximum = _maximum;
+        _minimum = minimum;
+        _maximum = maximum;
     }
 
     bool operator() (const vente & v) const
