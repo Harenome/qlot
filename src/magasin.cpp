@@ -23,6 +23,7 @@ magasin::magasin (void)
 }
 
 magasin::magasin (const magasin & m)
+: _modification_sauvegarde (false)
 {
     _articles = m._articles;
     _stock = m._stock;
@@ -30,6 +31,7 @@ magasin::magasin (const magasin & m)
 }
 
 magasin::magasin (const articles_existants & a, const stock & s, const historique_ventes & h)
+: _modification_sauvegarde (false)
 {
     _articles = a;
     _stock = s;
@@ -47,6 +49,11 @@ magasin::~magasin (void)
 ////////////////////////////////////////////////////////////////////////////////
 // Sélecteurs.
 ////////////////////////////////////////////////////////////////////////////////
+
+bool magasin::modifie_depuis_sauvegarde (void) const
+{
+    return _modification_sauvegarde;
+}
 
 bool magasin::article_existe (unsigned int reference) const
 {
@@ -310,6 +317,7 @@ void magasin::ajouter_article (const article & a, unsigned int quantite, const p
 {
     _articles.ajouter_article (a);
     _stock.ajouter_article (a.reference (), quantite, rabais);
+    _modification_sauvegarde = true;
 }
 
 void magasin::ajouter_vente (const vente & v)
@@ -323,6 +331,7 @@ void magasin::ajouter_vente (const vente & v)
 
         modifier_quantite_article (r,  ancien_stock - a.quantite_vendue ());
     }
+    _modification_sauvegarde = true;
 }
 
 void magasin::_modificateur_reference (unsigned int reference, unsigned int valeur,
@@ -349,6 +358,7 @@ void magasin::_modificateur_reference (unsigned int reference, unsigned int vale
         _articles.ajouter_article (a);
         _stock.remplacer_reference (reference, nouvelle_reference);
         _historique.remplacer_references (reference, nouvelle_reference);
+        _modification_sauvegarde = true;
     }
 }
 
@@ -385,7 +395,10 @@ void magasin::modifier_taille_article (const reference_article & reference, unsi
 void magasin::modifier_quantite_article (unsigned int reference, unsigned int quantite)
 {
     if (_stock.article_en_stock (reference))
+    {
         _stock[reference].modifier_quantite_stock (quantite);
+        _modification_sauvegarde = true;
+    }
 }
 
 void magasin::modifier_quantite_article (const reference_article & reference, unsigned int quantite)
@@ -396,13 +409,19 @@ void magasin::modifier_quantite_article (const reference_article & reference, un
 void magasin::modifier_rabais_article (unsigned int reference, unsigned int rabais)
 {
     if (_stock.article_en_stock (reference))
+    {
         _stock[reference].modifier_rabais (rabais);
+        _modification_sauvegarde = true;
+    }
 }
 
 void magasin::modifier_rabais_article (unsigned int reference, const pourcentage & rabais)
 {
     if (_stock.article_en_stock (reference))
+    {
         _stock[reference].modifier_rabais (rabais);
+        _modification_sauvegarde = true;
+    }
 }
 
 void magasin::modifier_rabais_article (const reference_article & reference, unsigned int rabais)
@@ -418,7 +437,10 @@ void magasin::modifier_rabais_article (const reference_article & reference, cons
 void magasin::modifier_prix_achat_article (unsigned int reference, double prix)
 {
     if (_articles.existe (reference))
+    {
         _articles[reference].modifier_prix_achat (prix);
+        _modification_sauvegarde = true;
+    }
 }
 
 void magasin::modifier_prix_achat_article (const reference_article & reference, double prix)
@@ -429,13 +451,19 @@ void magasin::modifier_prix_achat_article (const reference_article & reference, 
 void magasin::modifier_prix_vente_article (unsigned int reference, double prix)
 {
     if (_articles.existe (reference))
+    {
         _articles[reference].modifier_prix_vente (prix);
+        _modification_sauvegarde = true;
+    }
 }
 
 void magasin::modifier_date_livraison_article (unsigned int reference, const date & date_livraison)
 {
     if (_articles.existe (reference))
+    {
         _articles[reference].modifier_date_livraison (date_livraison);
+        _modification_sauvegarde = true;
+    }
 }
 
 void magasin::modifier_date_livraison_article (const reference_article & reference, const date & date_livraison)
@@ -446,7 +474,10 @@ void magasin::modifier_date_livraison_article (const reference_article & referen
 void magasin::modifier_date_livraison_article (unsigned int reference, unsigned int jour, unsigned int mois, unsigned int annee)
 {
     if (_articles.existe (reference))
+    {
         _articles[reference].modifier_date_livraison (jour, mois, annee);
+        _modification_sauvegarde = true;
+    }
 }
 
 void magasin::modifier_date_livraison_article (const reference_article & reference, unsigned int jour, unsigned int mois, unsigned int annee)
@@ -461,23 +492,30 @@ void magasin::annuler_vente (const vente & v)
 
 void magasin::annuler_vente (unsigned int id)
 {
-    vente ancienne_vente = _historique[id];
-    for (vente_const_iterator it = ancienne_vente.begin (); it != ancienne_vente.end (); ++it)
+    if (vente_existe (id))
     {
-        article_vendu a = it->second;
-        reference_article r = a.reference ();
-        unsigned int ancien_stock = _stock[r].quantite_stock ();
+        vente ancienne_vente = _historique[id];
+        for (vente_const_iterator it = ancienne_vente.begin (); it != ancienne_vente.end (); ++it)
+        {
+            article_vendu a = it->second;
+            reference_article r = a.reference ();
+            unsigned int ancien_stock = _stock[r].quantite_stock ();
 
-        modifier_quantite_article (r,  ancien_stock + a.quantite_vendue ());
+            modifier_quantite_article (r,  ancien_stock + a.quantite_vendue ());
+        }
+
+        _historique.retirer_vente (id);
+        _modification_sauvegarde = true;
     }
-
-    _historique.retirer_vente (id);
 }
 
 void magasin::modifier_date_vente (unsigned int id, const date & d)
 {
     if (_historique.existe (id))
+    {
         _historique[id].modifier_date_vente (d);
+        _modification_sauvegarde = true;
+    }
 }
 
 void magasin::modifier_date_vente (unsigned int id, unsigned int jour, unsigned int mois, unsigned int annee)
@@ -494,6 +532,7 @@ void magasin::annuler_vente_article (unsigned int id, unsigned int reference)
         unsigned int nouveau_stock = _stock[reference].quantite_stock () + vendu;
         _historique[id].retirer_article_vendu (reference);
         _stock[reference].modifier_quantite_stock (nouveau_stock);
+        _modification_sauvegarde = true;
     }
 }
 
@@ -512,6 +551,7 @@ void magasin::modifier_vente_article_quantite (unsigned int id, unsigned int ref
         unsigned int nouveau_stock = _stock[reference].quantite_stock () + annule;
         _historique[id][reference].modifier_quantite_vendue (quantite);
         _stock[reference].modifier_quantite_stock (nouveau_stock);
+        _modification_sauvegarde = true;
     }
 }
 
@@ -523,12 +563,25 @@ void magasin::modifier_vente_article_quantite (unsigned int id, const reference_
 void magasin::modifier_vente_article_prix (unsigned int id, unsigned int reference, double prix)
 {
     if (_historique.existe (id) && _historique[id].vendu_article (reference))
+    {
         _historique[id][reference].modifier_prix (prix);
+        _modification_sauvegarde = true;
+    }
 }
 
 void magasin::modifier_vente_article_prix (unsigned int id, const reference_article & reference, double prix)
 {
     modifier_vente_article_prix (id, reference.vers_entier (), prix);
+}
+
+void magasin::sauvegarde_faite (void)
+{
+    _modification_sauvegarde = false;
+}
+
+void magasin::modifier_etat_sauvegarde (bool etat)
+{
+    _modification_sauvegarde = etat;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
