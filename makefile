@@ -69,4 +69,4 @@ cleanall: clean cleandoc
 		@echo "Clean."
 
 archive:
-		@tar -cvzf $(shell basename `pwd`).tar.gz $(PATH_SRC) $(PATH_INC) makefile AUTHORS COPYING LICENSE README README.md
+		@tar -cvzf $(shell basename `pwd`).tar.gz $(PATH_SRC) $(PATH_INC) makefile qlot images AUTHORS COPYING LICENSE README README.md bdd

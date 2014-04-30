@@ -678,7 +678,7 @@ void MainWindow::ouvre_detail()
 
 void MainWindow::modif_article()
 {
-    id_vente = ui->tableau_recherche_gestion->item(ui->tableau_recherche_gestion->currentRow(),0)->text().toInt()*10000 + couleur_to_int(ui->tableau_recherche_gestion->item(ui->tableau_recherche_gestion->currentRow(),1)->text())*100 + ui->tableau_recherche_gestion->item(ui->tableau_recherche_gestion->currentRow(),2)->text().toInt();
+    //id_vente = ui->tableau_recherche_gestion->item(ui->tableau_recherche_gestion->currentRow(),0)->text().toInt()*10000 + couleur_to_int(ui->tableau_recherche_gestion->item(ui->tableau_recherche_gestion->currentRow(),1)->text())*100 + ui->tableau_recherche_gestion->item(ui->tableau_recherche_gestion->currentRow(),2)->text().toInt();
     ModifArticleDialog mad(this);
     mad.exec();
 
